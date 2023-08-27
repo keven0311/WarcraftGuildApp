@@ -44,25 +44,34 @@ function TopNavbar() {
     <Navbar expand="lg" className="bg-body-tertiary">
       <Container>
         <Navbar.Brand href="/">WarcraftGuild</Navbar.Brand>
-        {Object.keys(user).length !== 0 ? (
-          <p>Hi, {user.name}</p>
-        ) : (
-          <p>Welcome!</p>
-        )}
+        <div className="mx-5">
+          {Object.keys(user).length !== 0 ? (
+            <p>Hi, {user.name}</p>
+          ) : (
+            <p>Welcome!</p>
+          )}
+        </div>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="me-auto">
-            <div id="logInDiv"></div>
-            {/* <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-              <NavDropdown.Item href="#">Somthing</NavDropdown.Item>
-              <NavDropdown.Item href="#">Somthing</NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item href="#">
-                <Button variant="primary" onClick={handleLogOut}>
-                  Log Out
-                </Button>
+          <Nav className="mx-5">
+            {/* <NavDropdown title="Login" id="basic-nav-dropdown">
+              <NavDropdown.Item>
+                <div id="logInDiv"></div>
               </NavDropdown.Item>
-            </NavDropdown> */}
+              <NavDropdown.Item>
+                {Object.keys(user).length !== 0 ? (
+                  <Button
+                    id="logOutButton"
+                    variant="light"
+                    onClick={handleLogOut}
+                  >
+                    Log Out
+                  </Button>
+                ) : null}
+              </NavDropdown.Item>
+               <NavDropdown.Divider /> 
+             </NavDropdown>  */}
+            <div id="logInDiv"></div>
             {Object.keys(user).length !== 0 ? (
               <Button id="logOutButton" variant="light" onClick={handleLogOut}>
                 Log Out
