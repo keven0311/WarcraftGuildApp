@@ -1,0 +1,23 @@
+.homeNav{
+    display: flex;
+    gap: 1rem;
+    align-items: center ;
+    justify-content: end;
+    align-content: space-between;
+    text-align: center;
+    flex-wrap: wrap;
+}
+
+p {
+    margin-bottom: 0 !important;
+}
+
+.left_text{
+    flex: 1;
+    text-align: left;
+    margin-left: 5px;
+}
+
+a{
+    text-decoration: none !important;
+}
