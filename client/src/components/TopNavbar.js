@@ -16,23 +16,27 @@ function TopNavbar() {
   );
 
   useEffect(() => {
-    /* global google */
-    if (window.google) {
-      google.accounts.id.initialize({
-        client_id: GOOGLE_CLIENT_ID,
-        callback: handleGoogle,
-      });
+    try {
+      /* global google */
+
+      if (window.google) {
+        google.accounts.id.initialize({
+          client_id: GOOGLE_CLIENT_ID,
+          callback: handleGoogle,
+        });
+        google.accounts.id.renderButton(document.getElementById("logInDiv"), {
+          theme: "filled_white",
+          size: "large",
+          text: "signin_with",
+          shape: "pill",
+          type: "icon",
+        });
+      }
+
+      // google.accounts.id.prompt();
+    } catch (err) {
+      console.log(err);
     }
-
-    google.accounts.id.renderButton(document.getElementById("logInDiv"), {
-      theme: "filled_white",
-      size: "large",
-      text: "signin_with",
-      shape: "pill",
-      type: "icon",
-    });
-
-    // google.accounts.id.prompt();
   }, [handleGoogle]);
 
   const handleLogOut = () => {
