@@ -10,6 +10,7 @@ import GuildMembers from "./pages/guild/GuildMembers";
 import AllGuilds from "./pages/guild/AllGuilds";
 import SingleGuild from "./pages/guild/SingleGuild";
 import CreateGuild from "./forms/guild/CreateGuild";
+import CreateCharacter from "./forms/character/CreateCharacter";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route path="/guild" element={<AllGuilds />} />
         <Route path="/guild/:name" element={<SingleGuild />} />
         <Route path="/guild/create" element={<CreateGuild />} />
+        <Route path="/character/create" element={<CreateCharacter />} />
       </Routes>
     </div>
   );

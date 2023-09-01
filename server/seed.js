@@ -1,4 +1,4 @@
-const { db, User, Guild, Member } = require("./db");
+const { db, User, Guild, Character } = require("./db");
 
 const seed = async () => {
   try {
@@ -17,14 +17,14 @@ const seed = async () => {
       region: "US",
       server: "Illidan",
     });
-    await Member.create({
-      name: "member one",
+    await Character.create({
+      name: "character one",
       server: "Illidan",
       characterClass: "Death Knight",
       race: "Human",
       // level:   test see if its 70 by default
       contact: "memberone@gmail.com",
-      description: "the first member ever",
+      description: "the first character ever",
       guildId: 1,
     });
   } catch (err) {

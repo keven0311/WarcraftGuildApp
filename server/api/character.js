@@ -1,12 +1,12 @@
 const express = require("express");
 const router = express.Router();
 
-const { Member } = require("../db");
+const { Character } = require("../db");
 
 router.get("/", async (req, res, next) => {
   try {
-    const members = await Member.findAll();
-    res.json(members);
+    const character = await Character.findAll();
+    res.json(character);
   } catch (err) {
     next(err);
   }
@@ -14,10 +14,10 @@ router.get("/", async (req, res, next) => {
 
 router.get("/:name", async (req, res, next) => {
   try {
-    const member = await Member.findOne({
+    const character = await Character.findOne({
       where: { name: req.params.name },
     });
-    res.json(member);
+    res.json(character);
   } catch (err) {
     next(err);
   }
@@ -27,16 +27,16 @@ router.post("/", async (req, res, next) => {
   try {
     const { name, server, characterClass, race, level, contact, description } =
       req.body;
-    const exsistMember = await Member.findOne({
+    const exsistCharacter = await Character.findOne({
       where: { name: name, server: server },
     });
-    if (!exsistMember) {
-      const newMember = await Member.create(req.body);
-      res.json(newMember);
+    if (!exsistCharacter) {
+      const newCharacter = await Character.create(req.body);
+      res.status(201).json("Character created!");
+      console.log("Character created");
     } else {
-      res.json(exsistMember);
-      console.log("Member already exsist!");
-      throw new Error("Member already exsist!");
+      res.status(400).json("Character already exsist!");
+      console.log("Character already exsist!");
     }
   } catch (err) {
     next(err);
@@ -46,11 +46,11 @@ router.post("/", async (req, res, next) => {
 router.delete("/:name:server", async (req, res, next) => {
   try {
     const { name, server } = req.params;
-    const deleteMember = await Member.findOne({
+    const deleteCharacter = await Character.findOne({
       where: { name: name, server: server },
     });
-    await deleteMember.destroy();
-    res.json(deleteMember);
+    await deleteCharacter.destroy();
+    res.json(deleteCharacter);
   } catch (err) {
     next(err);
   }
@@ -59,11 +59,11 @@ router.delete("/:name:server", async (req, res, next) => {
 router.put("/:name:server", async (req, res, next) => {
   try {
     const { name, server } = req.params;
-    const editMember = await Member.findOne({
+    const editCharacter = await Character.findOne({
       where: { name: name, server: server },
     });
-    const updatedMember = await editMember.update(req.body);
-    res.json(updatedMember);
+    const updatedCharacter = await editCharacter.update(req.body);
+    res.json(updatedCharacter);
   } catch (err) {
     next(err);
   }

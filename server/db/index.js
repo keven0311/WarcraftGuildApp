@@ -1,14 +1,15 @@
 const db = require("./database");
 const User = require("./models/User");
 const Guild = require("./models/Guild");
-const Member = require("./models/Member");
+const Character = require("./models/Character");
 
-Guild.hasMany(Member);
-Member.belongsTo(Guild);
+Guild.hasMany(Character);
+Character.belongsTo(Guild);
+Character.belongsTo(User);
 
 module.exports = {
   db,
   User,
   Guild,
-  Member,
+  Character,
 };

@@ -1,6 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import userSlice from "./userSlice";
 
 export const fetchAllGuilds = createAsyncThunk("fetchAllGuilds", async () => {
   try {
@@ -93,7 +92,7 @@ const guildSlice = createSlice({
 
 export const selectAllGuilds = (state) => state.guild.allguild;
 export const selectSingleGuild = (state) => state.guild.singleguild;
-export const getCreateStatus = (state) => state.guild.createStatus;
+export const getGuildCreateStatus = (state) => state.guild.createStatus;
 export const selectError = (state) => state.guild.error;
 export const { resetCreateStatus } = guildSlice.actions;
 

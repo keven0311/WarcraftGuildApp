@@ -2,7 +2,7 @@ require("dotenv").config();
 const Sequelize = require("sequelize");
 const db = require("../database");
 
-const Member = db.define("member", {
+const Character = db.define("Character", {
   name: {
     type: Sequelize.STRING,
     allowNull: false,
@@ -65,4 +65,4 @@ const Member = db.define("member", {
   },
 });
 
-module.exports = Member;
+module.exports = Character;

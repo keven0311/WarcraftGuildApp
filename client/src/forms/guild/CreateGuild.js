@@ -3,7 +3,7 @@ import { Button, Form, Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import {
   createGuild,
-  getCreateStatus,
+  getGuildCreateStatus,
   resetCreateStatus,
 } from "../../store/slices/guildSlice";
 import { ToastContainer, toast } from "react-toastify";
@@ -14,7 +14,7 @@ function CreateGuild() {
   const [name, setName] = useState("");
   const [region, setRegion] = useState("");
   const [server, setServer] = useState("");
-  const createStatus = useSelector(getCreateStatus);
+  const createStatus = useSelector(getGuildCreateStatus);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
