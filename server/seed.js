@@ -12,6 +12,12 @@ const seed = async () => {
       name: "SeedTestUser",
       email: "seedtestuser@gmail.com",
     });
+    await User.create({
+      name: "kaichong lin",
+      email: "kaichongapi@gmail.com",
+      picture:
+        "https://lh3.googleusercontent.com/a/AAcHTte43i3pnC31FO9xhlIOXXYQOaKpfNHoISCKcPl7-q3j=s96-c",
+    });
     await Guild.create({
       name: "sampleGuild",
       region: "US",
@@ -26,6 +32,18 @@ const seed = async () => {
       contact: "memberone@gmail.com",
       description: "the first character ever",
       guildId: 1,
+      userId: 3,
+    });
+    await Character.create({
+      name: "character two",
+      server: "Illidan",
+      characterClass: "Rogue",
+      race: "Orc",
+      // level:   test see if its 70 by default
+      contact: "membertwo@gmail.com",
+      description: "second character",
+      guildId: 1,
+      userId: 3,
     });
   } catch (err) {
     console.error(err);

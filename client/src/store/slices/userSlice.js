@@ -10,6 +10,18 @@ export const createUser = createAsyncThunk("createUser", async (userInfo) => {
   }
 });
 
+export const getUserInfo = createAsyncThunk(
+  "get/userinfo",
+  async (userName) => {
+    try {
+      const { data } = await axios.get(`/api/user/${userName}`);
+      return data;
+    } catch (err) {
+      return err.message;
+    }
+  }
+);
+
 const userSlice = createSlice({
   name: "user",
   initialState: {
@@ -22,6 +34,9 @@ const userSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(createUser.fulfilled, (state, action) => {
+      state.user = action.payload;
+    });
+    builder.addCase(getUserInfo.fulfilled, (state, action) => {
       state.user = action.payload;
     });
   },

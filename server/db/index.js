@@ -4,6 +4,7 @@ const Guild = require("./models/Guild");
 const Character = require("./models/Character");
 
 Guild.hasMany(Character);
+User.hasMany(Character);
 Character.belongsTo(Guild);
 Character.belongsTo(User);
 

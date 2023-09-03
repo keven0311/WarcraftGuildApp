@@ -15,10 +15,16 @@ const useFetch = (url, targetDiv) => {
   const handleGoogle = async (res) => {
     // console.log(res);
     const userData = jwt_decode(res.credential);
-    const newUser = { name: userData.name, email: userData.email };
+    console.log(userData);
+    const newUser = {
+      name: userData.name,
+      email: userData.email,
+      picture: userData.picture,
+    };
+    sessionStorage.setItem("authToken", res.credential);
     dispatch(createUser(newUser));
+    dispatch(setUser(userData));
     document.getElementById(targetDiv).hidden = true;
-    navigate("/");
   };
 
   return { loading, error, handleGoogle };

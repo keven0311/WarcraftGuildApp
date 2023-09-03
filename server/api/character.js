@@ -23,6 +23,17 @@ router.get("/:name", async (req, res, next) => {
   }
 });
 
+router.get("/user/:id", async (req, res, next) => {
+  try {
+    const userCharacters = await Character.findAll({
+      where: { userId: req.params.id },
+    });
+    res.json(userCharacters);
+  } catch (error) {
+    next(error);
+  }
+});
+
 router.post("/", async (req, res, next) => {
   try {
     const { name, server, characterClass, race, level, contact, description } =
