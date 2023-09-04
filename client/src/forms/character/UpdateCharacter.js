@@ -1,14 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { Button, Form, Row, Col } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import {
-  createCharacter,
-  getCharacterCreateStatus,
+  fetchSingleCharacter,
+  selectSingleCharacter,
+  updateCharacter,
 } from "../../store/slices/characterSlice";
 import useCharacterForm from "../../hooks/useCharacterForm";
+import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
-function CreateCharacter() {
+function UpdateCharacter() {
+  const dispatch = useDispatch();
+  const { username, character } = useParams();
+  const targetCharacter = useSelector(selectSingleCharacter);
   const [name, setName] = useState("");
   const [server, setServer] = useState("");
   const [characterClass, setCharacterClass] = useState("");
@@ -16,7 +21,18 @@ function CreateCharacter() {
   const [level, setLevel] = useState(0);
   const [description, setDescription] = useState("");
   const { validated, handleSubmit } = useCharacterForm(
-    createCharacter({ name, server, characterClass, race, level, description })
+    updateCharacter({
+      server: targetCharacter.server,
+      name: targetCharacter.name,
+      info: {
+        name,
+        server,
+        characterClass,
+        race,
+        level,
+        description,
+      },
+    })
   );
 
   const characterClasses = [
@@ -52,6 +68,18 @@ function CreateCharacter() {
     "Goblin",
   ];
 
+  useEffect(() => {
+    dispatch(fetchSingleCharacter(character));
+    if (Object.keys(targetCharacter).length > 0) {
+      setName(targetCharacter.name);
+      setServer(targetCharacter.server);
+      setCharacterClass(targetCharacter.characterClass);
+      setRace(targetCharacter.race);
+      setLevel(targetCharacter.level);
+      setDescription(targetCharacter.description);
+    }
+  }, [dispatch, character, targetCharacter.name, targetCharacter.server]);
+
   return (
     <Form
       noValidate
@@ -60,7 +88,7 @@ function CreateCharacter() {
       className="m-4"
     >
       <Row className="mb-3">
-        <h1>New Character:</h1>
+        <h1>Edit Character:</h1>
         <Form.Group as={Col} md="4" controlId="validationCustom01">
           <Form.Label>Name</Form.Label>
           <Form.Control
@@ -85,7 +113,10 @@ function CreateCharacter() {
         </Form.Group>
         <Form.Group as={Col} md="4" controlId="validationCustom02">
           <Form.Label>Class</Form.Label>
-          <Form.Select onChange={(e) => setCharacterClass(e.target.value)}>
+          <Form.Select
+            onChange={(e) => setCharacterClass(e.target.value)}
+            value={characterClass}
+          >
             <option>Select a class</option>
             {characterClasses.map((characterClass, idx) => (
               <option key={idx} value={characterClass}>
@@ -96,7 +127,7 @@ function CreateCharacter() {
         </Form.Group>
         <Form.Group as={Col} md="4" controlId="validationCustom02">
           <Form.Label>Race</Form.Label>
-          <Form.Select onChange={(e) => setRace(e.target.value)}>
+          <Form.Select onChange={(e) => setRace(e.target.value)} value={race}>
             <option>Select a race</option>
             {characterRace.map((characterRace, idx) => (
               <option key={idx} value={characterRace}>
@@ -126,8 +157,8 @@ function CreateCharacter() {
           <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
         </Form.Group>
       </Row>
-      <Button type="submit">Submit form</Button>
-      <Button href="#" className="mx-3">
+      <Button type="submit">Update</Button>
+      <Button href={`/profile/${username}`} className="mx-3">
         Go Back
       </Button>
       <ToastContainer />
@@ -135,4 +166,4 @@ function CreateCharacter() {
   );
 }
 
-export default CreateCharacter;
+export default UpdateCharacter;

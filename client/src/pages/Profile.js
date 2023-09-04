@@ -56,7 +56,10 @@ function Profile() {
                   <td>{character.level}</td>
                   <td>{character.description}</td>
                   <td>
-                    <Button variant="outline-primary" href="#">
+                    <Button
+                      variant="outline-primary"
+                      href={`/profile/${user.name}/${character.name}`}
+                    >
                       Edit
                     </Button>
                   </td>

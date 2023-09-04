@@ -14,6 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 import useFetch from "./hooks/useFetch";
 import { setUser } from "./store/slices/userSlice";
 import jwt_decode from "jwt-decode";
+import UpdateCharacter from "./forms/character/UpdateCharacter";
 const GOOGLE_CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID;
 
 function App() {
@@ -74,6 +75,10 @@ function App() {
         <Route path="/guild/create" element={<CreateGuild />} />
         <Route path="/character/create" element={<CreateCharacter />} />
         <Route path="/profile/:name" element={<Profile />} />
+        <Route
+          path="/profile/:username/:character"
+          element={<UpdateCharacter />}
+        />
       </Routes>
     </div>
   );

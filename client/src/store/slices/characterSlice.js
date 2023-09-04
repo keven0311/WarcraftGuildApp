@@ -37,18 +37,34 @@ export const getUserCharacters = createAsyncThunk(
   }
 );
 
+export const updateCharacter = createAsyncThunk(
+  "put/character",
+  async ({ server, name, info }) => {
+    try {
+      const { data } = await axios.put(
+        `/api/character/${server}/${name}`,
+        info
+      );
+      return data;
+    } catch (err) {
+      return err.message;
+    }
+  }
+);
+
 const characterSlice = createSlice({
   name: "character",
   initialState: {
     singlecharacter: {},
     userCharacters: [],
     createStatus: "",
+    updateStatus: "",
     error: null,
   },
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchSingleCharacter.fulfilled, (state, action) => {
-      state.singlemember = action.payload;
+      state.singlecharacter = action.payload;
     });
     builder.addCase(createCharacter.fulfilled, (state, action) => {
       state.createStatus = action.payload;
@@ -56,11 +72,15 @@ const characterSlice = createSlice({
     builder.addCase(getUserCharacters.fulfilled, (state, action) => {
       state.userCharacters = action.payload;
     });
+    builder.addCase(updateCharacter.fulfilled, (state, action) => {
+      state.updateStatus = action.payload;
+    });
   },
 });
 
-export const selectSingleMember = (state) => state.character.singlecharacter;
+export const selectSingleCharacter = (state) => state.character.singlecharacter;
 export const getCharacterCreateStatus = (state) => state.character.createStatus;
 export const selectUserCharacters = (state) => state.character.userCharacters;
+export const getUpdateStatus = (state) => state.character.updateStatus;
 
 export default characterSlice.reducer;

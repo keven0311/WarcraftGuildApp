@@ -54,7 +54,7 @@ router.post("/", async (req, res, next) => {
   }
 });
 
-router.delete("/:name:server", async (req, res, next) => {
+router.delete("/:server/:name", async (req, res, next) => {
   try {
     const { name, server } = req.params;
     const deleteCharacter = await Character.findOne({
@@ -67,14 +67,18 @@ router.delete("/:name:server", async (req, res, next) => {
   }
 });
 
-router.put("/:name:server", async (req, res, next) => {
+router.put("/:server/:name", async (req, res, next) => {
   try {
     const { name, server } = req.params;
     const editCharacter = await Character.findOne({
       where: { name: name, server: server },
     });
-    const updatedCharacter = await editCharacter.update(req.body);
-    res.json(updatedCharacter);
+    if (editCharacter) {
+      await editCharacter.update(req.body);
+      res.status(201).json("Character updated!");
+    } else {
+      return res.status(404).json("Character not found!");
+    }
   } catch (err) {
     next(err);
   }
