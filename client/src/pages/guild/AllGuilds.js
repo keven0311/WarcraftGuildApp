@@ -13,7 +13,7 @@ function AllGuilds() {
   }, [dispatch]);
 
   return (
-    <Container>
+    <Container className="my-3">
       {allGuilds.length > 0 ? (
         <Row>
           <table>
@@ -50,7 +50,11 @@ function AllGuilds() {
         <p>No Guild</p>
       )}
       <Row>
-        <Button variant="outline-primary" href="/guild/create">
+        <Button
+          className="w-25 my-4"
+          variant="outline-primary"
+          href="/guild/create"
+        >
           Create Guild
         </Button>
       </Row>

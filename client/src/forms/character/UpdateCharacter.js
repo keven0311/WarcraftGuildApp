@@ -9,6 +9,10 @@ import {
 import useCharacterForm from "../../hooks/useCharacterForm";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import {
+  characterClasses,
+  characterRace,
+} from "../../utilities/characterUtilities";
 
 function UpdateCharacter() {
   const dispatch = useDispatch();
@@ -34,39 +38,6 @@ function UpdateCharacter() {
       },
     })
   );
-
-  const characterClasses = [
-    "Death Knight",
-    "Demon Hunter",
-    "Druid",
-    "Evoker",
-    "Hunter",
-    "Mage",
-    "Monk",
-    "Paladin",
-    "Priest",
-    "Rogue",
-    "Shaman",
-    "Warlock",
-    "Warrior",
-  ];
-
-  const characterRace = [
-    "Human",
-    "Dwarf",
-    "Night Elf",
-    "Gnome",
-    "Draenei",
-    "Worgen",
-    "Pandaren",
-    "Dracthyr",
-    "Orc",
-    "Undead",
-    "Tauren",
-    "Troll",
-    "Blood Elf",
-    "Goblin",
-  ];
 
   useEffect(() => {
     dispatch(fetchSingleCharacter(character));

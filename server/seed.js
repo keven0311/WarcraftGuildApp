@@ -45,6 +45,28 @@ const seed = async () => {
       guildId: 1,
       userId: 3,
     });
+    await Character.create({
+      name: "character three",
+      server: "Illidan",
+      characterClass: "Mage",
+      race: "Orc",
+      // level:   test see if its 70 by default
+      contact: "memberthree@gmail.com",
+      description: "3rd character",
+      guildId: 1,
+      userId: 3,
+    });
+    await Character.create({
+      name: "character four",
+      server: "Illidan",
+      characterClass: "Demon Hunter",
+      race: "Dwarf",
+      // level:   test see if its 70 by default
+      contact: "memberfour@gmail.com",
+      description: "4th character",
+      guildId: 1,
+      userId: 3,
+    });
   } catch (err) {
     console.error(err);
   }

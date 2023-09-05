@@ -15,6 +15,7 @@ import useFetch from "./hooks/useFetch";
 import { setUser } from "./store/slices/userSlice";
 import jwt_decode from "jwt-decode";
 import UpdateCharacter from "./forms/character/UpdateCharacter";
+import SingleCharacter from "./pages/character/SingleCharacter";
 const GOOGLE_CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID;
 
 function App() {
@@ -79,6 +80,7 @@ function App() {
           path="/profile/:username/:character"
           element={<UpdateCharacter />}
         />
+        <Route path="/character/:id" element={<SingleCharacter />} />
       </Routes>
     </div>
   );

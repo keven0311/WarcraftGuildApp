@@ -34,6 +34,17 @@ router.get("/user/:id", async (req, res, next) => {
   }
 });
 
+router.get("/guild/:id", async (req, res, next) => {
+  try {
+    const guildCharacters = await Character.findAll({
+      where: { guildId: req.params.id },
+    });
+    res.json(guildCharacters);
+  } catch (err) {
+    next(err);
+  }
+});
+
 router.post("/", async (req, res, next) => {
   try {
     const { name, server, characterClass, race, level, contact, description } =

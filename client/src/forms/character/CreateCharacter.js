@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { Button, Form, Row, Col } from "react-bootstrap";
-
 import { ToastContainer } from "react-toastify";
 import { createCharacter } from "../../store/slices/characterSlice";
 import useCharacterForm from "../../hooks/useCharacterForm";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserInfo, selectUser } from "../../store/slices/userSlice";
+import {
+  characterClasses,
+  characterRace,
+} from "../../utilities/characterUtilities";
 
 function CreateCharacter() {
   const dispatch = useDispatch();
@@ -27,39 +30,6 @@ function CreateCharacter() {
       userId: user.id,
     })
   );
-
-  const characterClasses = [
-    "Death Knight",
-    "Demon Hunter",
-    "Druid",
-    "Evoker",
-    "Hunter",
-    "Mage",
-    "Monk",
-    "Paladin",
-    "Priest",
-    "Rogue",
-    "Shaman",
-    "Warlock",
-    "Warrior",
-  ];
-
-  const characterRace = [
-    "Human",
-    "Dwarf",
-    "Night Elf",
-    "Gnome",
-    "Draenei",
-    "Worgen",
-    "Pandaren",
-    "Dracthyr",
-    "Orc",
-    "Undead",
-    "Tauren",
-    "Troll",
-    "Blood Elf",
-    "Goblin",
-  ];
 
   useEffect(() => {
     if (Object.keys(user).length > 0) {
