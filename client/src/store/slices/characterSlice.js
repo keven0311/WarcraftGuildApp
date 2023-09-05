@@ -52,6 +52,18 @@ export const updateCharacter = createAsyncThunk(
   }
 );
 
+export const deleteCharacter = createAsyncThunk(
+  "delete/character",
+  async ({ server, name }) => {
+    try {
+      const { data } = await axios.delete(`/api/character/${server}/${name}`);
+      return data;
+    } catch (error) {
+      return error.message;
+    }
+  }
+);
+
 const characterSlice = createSlice({
   name: "character",
   initialState: {
@@ -59,6 +71,7 @@ const characterSlice = createSlice({
     userCharacters: [],
     createStatus: "",
     updateStatus: "",
+    deleteStatus: "",
     error: null,
   },
   reducers: {},
@@ -75,12 +88,16 @@ const characterSlice = createSlice({
     builder.addCase(updateCharacter.fulfilled, (state, action) => {
       state.updateStatus = action.payload;
     });
+    builder.addCase(deleteCharacter.fulfilled, (state, action) => {
+      state.deleteStatus = action.payload;
+    });
   },
 });
 
 export const selectSingleCharacter = (state) => state.character.singlecharacter;
 export const getCharacterCreateStatus = (state) => state.character.createStatus;
 export const selectUserCharacters = (state) => state.character.userCharacters;
-export const getUpdateStatus = (state) => state.character.updateStatus;
+export const getCharacterUpdateStatus = (state) => state.character.updateStatus;
+export const getCharacterDeleteStatus = (state) => state.character.deleteStatus;
 
 export default characterSlice.reducer;

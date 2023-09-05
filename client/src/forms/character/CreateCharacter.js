@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { Button, Form, Row, Col } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
-import { ToastContainer, toast } from "react-toastify";
-import {
-  createCharacter,
-  getCharacterCreateStatus,
-} from "../../store/slices/characterSlice";
+
+import { ToastContainer } from "react-toastify";
+import { createCharacter } from "../../store/slices/characterSlice";
 import useCharacterForm from "../../hooks/useCharacterForm";
+import { useDispatch, useSelector } from "react-redux";
+import { getUserInfo, selectUser } from "../../store/slices/userSlice";
 
 function CreateCharacter() {
+  const dispatch = useDispatch();
+  const user = useSelector(selectUser);
   const [name, setName] = useState("");
   const [server, setServer] = useState("");
   const [characterClass, setCharacterClass] = useState("");
@@ -16,7 +17,15 @@ function CreateCharacter() {
   const [level, setLevel] = useState(0);
   const [description, setDescription] = useState("");
   const { validated, handleSubmit } = useCharacterForm(
-    createCharacter({ name, server, characterClass, race, level, description })
+    createCharacter({
+      name,
+      server,
+      characterClass,
+      race,
+      level,
+      description,
+      userId: user.id,
+    })
   );
 
   const characterClasses = [
@@ -51,6 +60,12 @@ function CreateCharacter() {
     "Blood Elf",
     "Goblin",
   ];
+
+  useEffect(() => {
+    if (Object.keys(user).length > 0) {
+      dispatch(getUserInfo(user.name));
+    }
+  }, [dispatch, user.name]);
 
   return (
     <Form
@@ -127,7 +142,7 @@ function CreateCharacter() {
         </Form.Group>
       </Row>
       <Button type="submit">Submit form</Button>
-      <Button href="#" className="mx-3">
+      <Button href={`/profile/${user.name}`} className="mx-3">
         Go Back
       </Button>
       <ToastContainer />

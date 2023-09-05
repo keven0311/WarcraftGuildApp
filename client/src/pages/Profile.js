@@ -2,24 +2,49 @@ import React, { useEffect } from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  deleteCharacter,
+  getCharacterDeleteStatus,
   getUserCharacters,
   selectUserCharacters,
 } from "../store/slices/characterSlice";
 import { getUserInfo, selectUser } from "../store/slices/userSlice";
 import { useParams } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
 
 function Profile() {
   const dispatch = useDispatch();
   const { name } = useParams();
   const user = useSelector(selectUser);
   const userCharacters = useSelector(selectUserCharacters);
+  const deleteStatus = useSelector(getCharacterDeleteStatus);
+
+  const handleDeleteCharacter = async (server, name) => {
+    await dispatch(
+      deleteCharacter({
+        server: server,
+        name: name,
+      })
+    );
+  };
 
   useEffect(() => {
-    if (user) {
-      dispatch(getUserCharacters(user.id));
+    if (Object.keys(user).length > 0) {
       dispatch(getUserInfo(name));
+      if (user.id) {
+        dispatch(getUserCharacters(user.id));
+      }
     }
   }, [dispatch, name, user.id]);
+
+  useEffect(() => {
+    if (deleteStatus) {
+      toast(deleteStatus);
+    }
+    if (user.id) {
+      dispatch(getUserCharacters(user.id));
+    }
+  }, [dispatch, deleteStatus]);
+
   return (
     <Container>
       <Row>
@@ -62,6 +87,14 @@ function Profile() {
                     >
                       Edit
                     </Button>
+                    <Button
+                      variant="outline-primary"
+                      onClick={() =>
+                        handleDeleteCharacter(character.server, character.name)
+                      }
+                    >
+                      Delete
+                    </Button>
                   </td>
                 </tr>
               ))
@@ -74,13 +107,15 @@ function Profile() {
         </table>
       </Row>
       <Row>
-        <Button variant="outline-primary" href="#">
+        <Button
+          variant="outline-primary"
+          href="/character/create"
+          className="w-50 my-4"
+        >
           add Character
         </Button>
-        <Button variant="outline-primary" className="w-50">
-          Edit
-        </Button>
       </Row>
+      <ToastContainer />
     </Container>
   );
 }

@@ -3,14 +3,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import {
   getCharacterCreateStatus,
-  getUpdateStatus,
+  getCharacterUpdateStatus,
 } from "../store/slices/characterSlice";
 
 export const useCharacterForm = (reduxThunk) => {
   const dispatch = useDispatch();
   const [validated, setValidated] = useState(false);
   const createCharacterStatus = useSelector(getCharacterCreateStatus);
-  const updateStatus = useSelector(getUpdateStatus);
+  const updateStatus = useSelector(getCharacterUpdateStatus);
 
   const handleSubmit = async (event) => {
     event.preventDefault();

@@ -61,7 +61,7 @@ router.delete("/:server/:name", async (req, res, next) => {
       where: { name: name, server: server },
     });
     await deleteCharacter.destroy();
-    res.json(deleteCharacter);
+    res.json("Character deleted!");
   } catch (err) {
     next(err);
   }
