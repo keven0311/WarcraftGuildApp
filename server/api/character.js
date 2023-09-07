@@ -56,6 +56,17 @@ router.get("/guild/:id", async (req, res, next) => {
   }
 });
 
+router.get("/unenrolled", async (req, res, next) => {
+  try {
+    const unenrolledCharacters = await Character.findAll({
+      where: { guildId: null },
+    });
+    res.json(unenrolledCharacters);
+  } catch (error) {
+    next(error);
+  }
+});
+
 router.post("/", async (req, res, next) => {
   try {
     const { name, server, characterClass, race, level, contact, description } =

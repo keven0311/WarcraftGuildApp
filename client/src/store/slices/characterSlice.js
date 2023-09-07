@@ -86,12 +86,25 @@ export const deleteCharacter = createAsyncThunk(
   }
 );
 
+export const unenrolledCharacters = createAsyncThunk(
+  "get/unenrolledCharacters",
+  async () => {
+    try {
+      const { data } = await axios.get(`/api/character/unenrolled`);
+      return data;
+    } catch (error) {
+      return error.message;
+    }
+  }
+);
+
 const characterSlice = createSlice({
   name: "character",
   initialState: {
     singlecharacter: {},
     userCharacters: [],
     guildCharacters: [],
+    unenrolledCharacters: [],
     createStatus: "",
     updateStatus: "",
     deleteStatus: "",
@@ -120,6 +133,9 @@ const characterSlice = createSlice({
     builder.addCase(fetchSingleCharacterById.fulfilled, (state, action) => {
       state.singlecharacter = action.payload;
     });
+    builder.addCase(unenrolledCharacters.fulfilled, (state, action) => {
+      state.unenrolledCharacters = action.payload;
+    });
   },
 });
 
@@ -130,5 +146,7 @@ export const getCharacterUpdateStatus = (state) => state.character.updateStatus;
 export const getCharacterDeleteStatus = (state) => state.character.deleteStatus;
 export const getSingleGuildCharacters = (state) =>
   state.character.guildCharacters;
+export const getUnenrolledCharacters = (state) =>
+  state.character.unenrolledCharacters;
 
 export default characterSlice.reducer;

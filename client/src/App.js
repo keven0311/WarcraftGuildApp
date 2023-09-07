@@ -16,6 +16,7 @@ import { setUser } from "./store/slices/userSlice";
 import jwt_decode from "jwt-decode";
 import UpdateCharacter from "./forms/character/UpdateCharacter";
 import SingleCharacter from "./pages/character/SingleCharacter";
+import EnrollGuild from "./forms/character/EnrollGuild";
 const GOOGLE_CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID;
 
 function App() {
@@ -81,6 +82,7 @@ function App() {
           element={<UpdateCharacter />}
         />
         <Route path="/character/:id" element={<SingleCharacter />} />
+        <Route path="/guild/:name/enroll" element={<EnrollGuild />} />
       </Routes>
     </div>
   );
