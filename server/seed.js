@@ -21,11 +21,12 @@ const seed = async () => {
     await Guild.create({
       name: "sampleGuild",
       region: "US",
-      server: "Illidan",
+      server: "illidan",
     });
     await Character.create({
       name: "character one",
-      server: "Illidan",
+      region: "us",
+      server: "illidan",
       characterClass: "Death Knight",
       race: "Human",
       // level:   test see if its 70 by default
@@ -36,7 +37,8 @@ const seed = async () => {
     });
     await Character.create({
       name: "character two",
-      server: "Illidan",
+      region: "cn",
+      server: "illidan",
       characterClass: "Rogue",
       race: "Orc",
       // level:   test see if its 70 by default
@@ -47,7 +49,8 @@ const seed = async () => {
     });
     await Character.create({
       name: "character three",
-      server: "Illidan",
+      region: "eu",
+      server: "illidan",
       characterClass: "Mage",
       race: "Orc",
       // level:   test see if its 70 by default
@@ -58,7 +61,8 @@ const seed = async () => {
     });
     await Character.create({
       name: "character four",
-      server: "Illidan",
+      region: "kr",
+      server: "illidan",
       characterClass: "Demon Hunter",
       race: "Dwarf",
       // level:   test see if its 70 by default

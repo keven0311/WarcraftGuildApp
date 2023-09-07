@@ -8,12 +8,14 @@ import { getUserInfo, selectUser } from "../../store/slices/userSlice";
 import {
   characterClasses,
   characterRace,
+  characterRegion,
 } from "../../utilities/characterUtilities";
 
 function CreateCharacter() {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
   const [name, setName] = useState("");
+  const [region, setRegion] = useState("");
   const [server, setServer] = useState("");
   const [characterClass, setCharacterClass] = useState("");
   const [race, setRace] = useState("");
@@ -22,6 +24,7 @@ function CreateCharacter() {
   const { validated, handleSubmit } = useCharacterForm(
     createCharacter({
       name,
+      region,
       server,
       characterClass,
       race,
@@ -56,6 +59,17 @@ function CreateCharacter() {
             placeholder="name"
           />
           <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+        </Form.Group>
+        <Form.Group as={Col} md="4" controlId="validationCustom02">
+          <Form.Label>Region</Form.Label>
+          <Form.Select onChange={(e) => setRegion(e.target.value)}>
+            <option>Select a Region</option>
+            {characterRegion.map((region, idx) => (
+              <option key={idx} value={region}>
+                {region}
+              </option>
+            ))}
+          </Form.Select>
         </Form.Group>
         <Form.Group as={Col} md="4" controlId="validationCustom02">
           <Form.Label>Server</Form.Label>

@@ -5,7 +5,19 @@ export const fetchSingleCharacter = createAsyncThunk(
   "fetchSingleCharacter",
   async (name) => {
     try {
-      const { data } = await axios.get(`/api/character/${name}`);
+      const { data } = await axios.get(`/api/character/name/${name}`);
+      return data;
+    } catch (error) {
+      return error.message;
+    }
+  }
+);
+
+export const fetchSingleCharacterById = createAsyncThunk(
+  "get/singleCharacter",
+  async (id) => {
+    try {
+      const { data } = await axios.get(`/api/character//id/${id}`);
       return data;
     } catch (error) {
       return error.message;
@@ -104,6 +116,9 @@ const characterSlice = createSlice({
     });
     builder.addCase(fetchGuildCharacters.fulfilled, (state, action) => {
       state.guildCharacters = action.payload;
+    });
+    builder.addCase(fetchSingleCharacterById.fulfilled, (state, action) => {
+      state.singlecharacter = action.payload;
     });
   },
 });

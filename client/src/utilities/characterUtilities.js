@@ -30,3 +30,5 @@ export const characterRace = [
   "Blood Elf",
   "Goblin",
 ];
+
+export const characterRegion = ["us", "eu", "cn", "tw", "kr"];

@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   characterClasses,
   characterRace,
+  characterRegion,
 } from "../../utilities/characterUtilities";
 
 function UpdateCharacter() {
@@ -19,6 +20,7 @@ function UpdateCharacter() {
   const { username, character } = useParams();
   const targetCharacter = useSelector(selectSingleCharacter);
   const [name, setName] = useState("");
+  const [region, setRegion] = useState("");
   const [server, setServer] = useState("");
   const [characterClass, setCharacterClass] = useState("");
   const [race, setRace] = useState("");
@@ -30,6 +32,7 @@ function UpdateCharacter() {
       name: targetCharacter.name,
       info: {
         name,
+        region,
         server,
         characterClass,
         race,
@@ -43,6 +46,7 @@ function UpdateCharacter() {
     dispatch(fetchSingleCharacter(character));
     if (Object.keys(targetCharacter).length > 0) {
       setName(targetCharacter.name);
+      setRegion(targetCharacter.region);
       setServer(targetCharacter.server);
       setCharacterClass(targetCharacter.characterClass);
       setRace(targetCharacter.race);
@@ -70,6 +74,20 @@ function UpdateCharacter() {
             placeholder="name"
           />
           <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+        </Form.Group>
+        <Form.Group as={Col} md="4" controlId="validationCustom02">
+          <Form.Label>Region</Form.Label>
+          <Form.Select
+            onChange={(e) => setRegion(e.target.value)}
+            value={region}
+          >
+            <option>Select a Region</option>
+            {characterRegion.map((region, idx) => (
+              <option key={idx} value={region}>
+                {region}
+              </option>
+            ))}
+          </Form.Select>
         </Form.Group>
         <Form.Group as={Col} md="4" controlId="validationCustom02">
           <Form.Label>Server</Form.Label>

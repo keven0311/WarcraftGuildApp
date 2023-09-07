@@ -7,6 +7,10 @@ const Character = db.define("Character", {
     type: Sequelize.STRING,
     allowNull: false,
   },
+  region: {
+    type: Sequelize.ENUM("us", "cn", "tw", "eu", "kr"),
+    allowNull: false,
+  },
   server: {
     type: Sequelize.STRING,
     allowNull: false,

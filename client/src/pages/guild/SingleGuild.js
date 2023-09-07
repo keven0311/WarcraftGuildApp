@@ -41,6 +41,7 @@ function SingleGuild() {
           <h5>{guild?.server}</h5>
         </Col>
         <Col>
+          <Button variant="secondary">Add character</Button>
           <Button variant="primary" href="/guild">
             Go back
           </Button>

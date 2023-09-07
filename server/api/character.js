@@ -12,10 +12,21 @@ router.get("/", async (req, res, next) => {
   }
 });
 
-router.get("/:name", async (req, res, next) => {
+router.get("/name/:name", async (req, res, next) => {
   try {
     const character = await Character.findOne({
       where: { name: req.params.name },
+    });
+    res.json(character);
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.get("/id/:id", async (req, res, next) => {
+  try {
+    const character = await Character.findOne({
+      where: { id: req.params.id },
     });
     res.json(character);
   } catch (err) {
