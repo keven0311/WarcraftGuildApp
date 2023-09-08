@@ -2,56 +2,70 @@ import React, { useEffect, useState } from "react";
 import { Button, Form, Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  createGuild,
-  getGuildCreateStatus,
-  resetCreateStatus,
+  getGuildUpdateStatus,
+  resetUpdateStatus,
+  updateGuild,
 } from "../../store/slices/guildSlice";
-import { ToastContainer, toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
+import { useParams } from "react-router-dom";
+import { selectUser } from "../../store/slices/userSlice";
 
-function CreateGuild() {
+function UpdateGuild() {
   const dispatch = useDispatch();
+  const user = useSelector(selectUser);
+  const { name } = useParams();
   const [validated, setValidated] = useState(false);
-  const [name, setName] = useState("");
+  const [guildName, setGuildName] = useState(name);
   const [region, setRegion] = useState("");
   const [server, setServer] = useState("");
   const [description, setDescription] = useState("");
   const [ownerEmail, setOwnerEmail] = useState("");
-  const createStatus = useSelector(getGuildCreateStatus);
+  const updateStatus = useSelector(getGuildUpdateStatus);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     const form = event.currentTarget;
+
     if (form.checkValidity() === false) {
       event.stopPropagation();
     } else {
       await dispatch(
-        createGuild({ name, region, server, description, ownerEmail })
+        updateGuild({
+          name: name,
+          info: {
+            name: guildName,
+            region,
+            server: server.toLowerCase(),
+            description,
+            ownerEmail: ownerEmail === "" ? user?.email : ownerEmail,
+          },
+        })
       );
     }
     setValidated(true);
   };
 
   useEffect(() => {
-    if (createStatus) {
-      if (createStatus === "Request failed with status code 400") {
-        toast("Guild already exsist!");
+    if (updateStatus) {
+      if (updateStatus === "Request failed with status code 500") {
+        toast.error("Oops something wrong!");
       } else {
-        toast(createStatus);
-        dispatch(resetCreateStatus());
+        toast.success(updateStatus);
+        dispatch(resetUpdateStatus());
       }
     }
-  }, [dispatch, createStatus]);
+  }, [dispatch, updateStatus]);
 
   return (
     <Form noValidate validated={validated} onSubmit={handleSubmit}>
       <Row className="mb-3">
-        <h1>New Guild:</h1>
+        <h1>Edit Guild:</h1>
         <Form.Group as={Col} md="4" controlId="validationCustom01">
           <Form.Label>Name</Form.Label>
           <Form.Control
             required
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            value={guildName}
+            onChange={(e) => setGuildName(e.target.value)}
             type="text"
             placeholder="name"
           />
@@ -82,8 +96,9 @@ function CreateGuild() {
         </Form.Group>
         <Form.Group as={Col} md="4" controlId="validationCustom02">
           <Form.Label>Description</Form.Label>
-          <Form.Control
-            required
+          <textarea
+            className="form-control"
+            rows={3}
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             type="text"
@@ -94,7 +109,6 @@ function CreateGuild() {
         <Form.Group as={Col} md="4" controlId="validationCustom02">
           <Form.Label>Owner Email</Form.Label>
           <Form.Control
-            required
             value={ownerEmail}
             onChange={(e) => setOwnerEmail(e.target.value)}
             type="text"
@@ -104,7 +118,7 @@ function CreateGuild() {
         </Form.Group>
       </Row>
       <Button type="submit">Submit form</Button>
-      <Button href="/guild" className="mx-3">
+      <Button href={`/guild/${name}`} className="mx-3">
         Go Back
       </Button>
       <ToastContainer />
@@ -112,4 +126,4 @@ function CreateGuild() {
   );
 }
 
-export default CreateGuild;
+export default UpdateGuild;

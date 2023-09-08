@@ -7,6 +7,10 @@ Guild.hasMany(Character);
 User.hasMany(Character);
 Character.belongsTo(Guild);
 Character.belongsTo(User);
+Guild.belongsTo(User, {
+  foreignKey: "ownerEmail",
+  targetKey: "email",
+});
 
 module.exports = {
   db,

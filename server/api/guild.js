@@ -58,8 +58,12 @@ router.put("/:name", async (req, res, next) => {
     const editGuild = await Guild.findOne({
       where: { name: req.params.name },
     });
-    const updatedGuild = await editGuild.update(req.body);
-    res.json(updatedGuild);
+    if (editGuild) {
+      await editGuild.update(req.body);
+      res.status(201).json("Guild info updated!");
+    } else {
+      return res.status(404).json("Guild not found!");
+    }
   } catch (err) {
     next(err);
   }

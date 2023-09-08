@@ -33,7 +33,7 @@ function UpdateCharacter() {
       info: {
         name,
         region,
-        server,
+        server: server.toLowerCase(),
         characterClass,
         race,
         level,
@@ -130,14 +130,18 @@ function UpdateCharacter() {
           <Form.Control
             value={level}
             onChange={(e) => setLevel(e.target.value)}
-            type="text"
+            type="number"
+            min="1"
+            max="70"
             placeholder="level"
           />
           <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
         </Form.Group>
         <Form.Group as={Col} md="4" controlId="validationCustom02">
           <Form.Label>Description</Form.Label>
-          <Form.Control
+          <textarea
+            className="form-control"
+            rows="3"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             type="text"

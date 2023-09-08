@@ -22,6 +22,20 @@ const seed = async () => {
       name: "sampleGuild",
       region: "US",
       server: "illidan",
+      description:
+        "This is a sample guild description will show here in single guild view. OH YEAH!",
+      announcement: "ATTENTION! THIS IS AN ANNOUNCEMENT!",
+      ownerEmail: "kaichongapi@gmail.com",
+    });
+    await Guild.create({
+      name: "Style",
+      region: "US",
+      server: "illidan",
+      description:
+        "This is top one Chinese guild in the US server! Join us if you have balls!",
+      announcement:
+        "We are raid 6 days every week to get into the Hall of Fame in the US server. Dont be late, hit harder, heal harder, tank better, kill bosses!",
+      ownerEmail: "kaichongapi@gmail.com",
     });
     await Character.create({
       name: "character one",
@@ -72,7 +86,7 @@ const seed = async () => {
       userId: 3,
     });
   } catch (err) {
-    console.error(err);
+    console.error(err.message);
   }
 };
 

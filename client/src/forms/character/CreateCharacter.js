@@ -25,7 +25,7 @@ function CreateCharacter() {
     createCharacter({
       name,
       region,
-      server,
+      server: server.toLowerCase(),
       characterClass,
       race,
       level,
@@ -62,7 +62,7 @@ function CreateCharacter() {
         </Form.Group>
         <Form.Group as={Col} md="4" controlId="validationCustom02">
           <Form.Label>Region</Form.Label>
-          <Form.Select onChange={(e) => setRegion(e.target.value)}>
+          <Form.Select required onChange={(e) => setRegion(e.target.value)}>
             <option>Select a Region</option>
             {characterRegion.map((region, idx) => (
               <option key={idx} value={region}>
@@ -84,7 +84,10 @@ function CreateCharacter() {
         </Form.Group>
         <Form.Group as={Col} md="4" controlId="validationCustom02">
           <Form.Label>Class</Form.Label>
-          <Form.Select onChange={(e) => setCharacterClass(e.target.value)}>
+          <Form.Select
+            required
+            onChange={(e) => setCharacterClass(e.target.value)}
+          >
             <option>Select a class</option>
             {characterClasses.map((characterClass, idx) => (
               <option key={idx} value={characterClass}>
@@ -95,7 +98,7 @@ function CreateCharacter() {
         </Form.Group>
         <Form.Group as={Col} md="4" controlId="validationCustom02">
           <Form.Label>Race</Form.Label>
-          <Form.Select onChange={(e) => setRace(e.target.value)}>
+          <Form.Select required onChange={(e) => setRace(e.target.value)}>
             <option>Select a race</option>
             {characterRace.map((characterRace, idx) => (
               <option key={idx} value={characterRace}>
@@ -109,14 +112,18 @@ function CreateCharacter() {
           <Form.Control
             value={level}
             onChange={(e) => setLevel(e.target.value)}
-            type="text"
+            type="number"
+            min="1"
+            max="70"
             placeholder="level"
           />
           <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
         </Form.Group>
         <Form.Group as={Col} md="4" controlId="validationCustom02">
           <Form.Label>Description</Form.Label>
-          <Form.Control
+          <textarea
+            className="form-control"
+            row="4"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             type="text"

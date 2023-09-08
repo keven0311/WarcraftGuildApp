@@ -4,7 +4,7 @@ const db = require("../database");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
-const User = db.define("user", {
+const User = db.define("users", {
   name: {
     type: Sequelize.STRING,
     allowNull: false,
@@ -12,6 +12,7 @@ const User = db.define("user", {
   email: {
     type: Sequelize.STRING,
     allowNull: false,
+    unique: true,
   },
   password: {
     type: Sequelize.STRING,

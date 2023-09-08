@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,10 +11,13 @@ import {
   getSingleGuildCharacters,
 } from "../../store/slices/characterSlice";
 import useUpdateCharacterGuild from "../../hooks/useUpdateCharacterGuild";
+import { selectUser } from "../../store/slices/userSlice";
+import AnnouncementButton from "../../components/AnnouncementButton";
 
 function SingleGuild() {
   const dispatch = useDispatch();
   const { name } = useParams();
+  const user = useSelector(selectUser);
   const guild = useSelector(selectSingleGuild);
   const guildCharacters = useSelector(getSingleGuildCharacters);
   //custom hook: handleUpdate function takes in server,name,guildId as parameter
@@ -39,16 +42,31 @@ function SingleGuild() {
           <h1>{guild?.name}</h1>
           <h5>{guild?.region}</h5>
           <h5>{guild?.server}</h5>
+          {guild.description && <h6>About: {guild?.description}</h6>}
         </Col>
         <Col>
-          <Button variant="secondary" href={`/guild/${guild.name}/enroll`}>
-            Add character
-          </Button>
+          {guild.ownerEmail === user.email ? (
+            <>
+              <Button variant="secondary" href={`/guild/${guild.name}/enroll`}>
+                Add character
+              </Button>
+              <Button variant="secondary" href={`/guild/${guild.name}/update`}>
+                Edit Guild Info
+              </Button>
+              <AnnouncementButton guildName={guild.name} />
+            </>
+          ) : null}
           <Button variant="primary" href="/guild">
             Go back
           </Button>
         </Col>
       </Row>
+      {guild.announcement && (
+        <Row>
+          <h6>{guild?.announcement}</h6>
+        </Row>
+      )}
+
       <Row className="my-3">
         <h3>Member list:</h3>
         <table>
@@ -79,12 +97,14 @@ function SingleGuild() {
                   >
                     View
                   </Button>
-                  <Button
-                    variant="outline-primary"
-                    onClick={() => handleRemoveFromGuild(character)}
-                  >
-                    Remove from guild
-                  </Button>
+                  {guild.ownerEmail === user.email ? (
+                    <Button
+                      variant="outline-primary"
+                      onClick={() => handleRemoveFromGuild(character)}
+                    >
+                      Remove from guild
+                    </Button>
+                  ) : null}
                 </td>
               </tr>
             ))}

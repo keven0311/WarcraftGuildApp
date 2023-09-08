@@ -42,12 +42,12 @@ export const deleteGuild = createAsyncThunk("deleteGuild", async (name) => {
 
 export const updateGuild = createAsyncThunk(
   "updateGuild",
-  async (name, info) => {
+  async ({ name, info }) => {
     try {
       const { data } = await axios.put(`/api/guild/${name}`, info);
       return data;
     } catch (err) {
-      console.log(err);
+      return err.message;
     }
   }
 );
@@ -58,11 +58,15 @@ const guildSlice = createSlice({
     allguild: [],
     singleguild: {},
     createStatus: null,
+    updateStatus: null,
     error: null,
   },
   reducers: {
     resetCreateStatus(state, action) {
       state.createStatus = null;
+    },
+    resetUpdateStatus(state, action) {
+      state.updateStatus = null;
     },
   },
   extraReducers: (builder) => {
@@ -85,7 +89,7 @@ const guildSlice = createSlice({
       state.singleguild = {};
     });
     builder.addCase(updateGuild.fulfilled, (state, action) => {
-      state.singleguild = action.payload;
+      state.updateStatus = action.payload;
     });
   },
 });
@@ -94,6 +98,7 @@ export const selectAllGuilds = (state) => state.guild.allguild;
 export const selectSingleGuild = (state) => state.guild.singleguild;
 export const getGuildCreateStatus = (state) => state.guild.createStatus;
 export const selectError = (state) => state.guild.error;
-export const { resetCreateStatus } = guildSlice.actions;
+export const getGuildUpdateStatus = (state) => state.guild.updateStatus;
+export const { resetCreateStatus, resetUpdateStatus } = guildSlice.actions;
 
 export default guildSlice.reducer;

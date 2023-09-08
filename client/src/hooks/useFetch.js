@@ -1,9 +1,7 @@
 import { useState } from "react";
 import jwt_decode from "jwt-decode";
-import { useDispatch, useSelector } from "react-redux";
-import { selectUser } from "../store/slices/userSlice";
+import { useDispatch } from "react-redux";
 import { setUser, createUser } from "../store/slices/userSlice";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 const useFetch = (url, targetDiv) => {
@@ -24,7 +22,7 @@ const useFetch = (url, targetDiv) => {
     sessionStorage.setItem("authToken", res.credential);
     dispatch(createUser(newUser));
     dispatch(setUser(userData));
-    document.getElementById(targetDiv).hidden = true;
+    // document.getElementById(targetDiv).hidden = true;
   };
 
   return { loading, error, handleGoogle };

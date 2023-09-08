@@ -20,6 +20,8 @@ function EnrollGuild() {
   const { updated, setUpdated, handleUpdate } = useUpdateCharacterGuild();
   const [searchInput, setSearchInput] = useState("");
 
+  //this way maybe not good when amount of unenrolled characters are too large.
+  //in that situation maybe add a search button to call a function search in database.
   const searchedCharacters = characters.filter((character) =>
     character.name.toLowerCase().includes(searchInput.toLowerCase())
   );
@@ -55,11 +57,7 @@ function EnrollGuild() {
             aria-describedby="inputGroup-sizing-default"
           />
         </InputGroup>
-        <Button
-          variant="primary"
-          className="p-1"
-          onClick={() => window.history.back()}
-        >
+        <Button variant="primary" className="p-1" href={`/guild/${guild.name}`}>
           Go back
         </Button>
       </div>

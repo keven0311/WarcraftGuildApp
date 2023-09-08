@@ -25,10 +25,20 @@ export const useCharacterForm = (reduxThunk) => {
 
   useEffect(() => {
     if (createCharacterStatus) {
-      toast(createCharacterStatus);
+      if (createCharacterStatus === "Request failed with status code 400") {
+        toast.error("Oops! Character already exsist!!!");
+      }
+      if (createCharacterStatus === "Character created!") {
+        toast.success(createCharacterStatus);
+      }
     }
     if (updateStatus) {
-      toast(updateStatus);
+      if (updateStatus === "Request failed with status code 500") {
+        toast.error("Oops! Something wrong...");
+      }
+      if (updateStatus === "Character updated!") {
+        toast.success(updateStatus);
+      }
     }
   }, [dispatch, createCharacterStatus, updateStatus]);
 

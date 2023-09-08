@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import "./App.css";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import SignUp from "./components/SignUp";
 import LogIn from "./components/LogIn";
@@ -10,18 +10,18 @@ import SingleGuild from "./pages/guild/SingleGuild";
 import CreateGuild from "./forms/guild/CreateGuild";
 import CreateCharacter from "./forms/character/CreateCharacter";
 import Profile from "./pages/Profile";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import useFetch from "./hooks/useFetch";
 import { setUser } from "./store/slices/userSlice";
 import jwt_decode from "jwt-decode";
 import UpdateCharacter from "./forms/character/UpdateCharacter";
 import SingleCharacter from "./pages/character/SingleCharacter";
 import EnrollGuild from "./forms/character/EnrollGuild";
+import UpdateGuild from "./forms/guild/UpdateGuild";
 const GOOGLE_CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID;
 
 function App() {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const storedToken = sessionStorage.getItem("authToken");
 
   if (storedToken) {
@@ -29,7 +29,7 @@ function App() {
     dispatch(setUser(userData));
   }
 
-  const { handleGoogle, loading, error } = useFetch(
+  const { handleGoogle } = useFetch(
     "http://localhost:4000/api/user",
     "logInDiv"
   );
@@ -58,16 +58,9 @@ function App() {
     }
   }, [handleGoogle]);
 
-  const handleLogOut = () => {
-    dispatch(setUser({}));
-    sessionStorage.removeItem("authToken");
-    document.getElementById("logInDiv").hidden = false;
-    navigate("/");
-  };
-
   return (
     <div className="App">
-      <TopNavbar handleLogOut={handleLogOut} />
+      <TopNavbar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/signup" element={<SignUp />} />
@@ -75,6 +68,7 @@ function App() {
         <Route path="/guild" element={<AllGuilds />} />
         <Route path="/guild/:name" element={<SingleGuild />} />
         <Route path="/guild/create" element={<CreateGuild />} />
+        <Route path="/guild/:name/update" element={<UpdateGuild />} />
         <Route path="/character/create" element={<CreateCharacter />} />
         <Route path="/profile/:name" element={<Profile />} />
         <Route

@@ -1,11 +1,21 @@
 import React from "react";
 import "../styles/navbar.css";
-import { useSelector } from "react-redux";
-import { selectUser } from "../store/slices/userSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { selectUser, setUser } from "../store/slices/userSlice";
 import { Button, Container, Nav, NavDropdown, Navbar } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
-function TopNavbar({ handleLogOut }) {
+function TopNavbar() {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const user = useSelector(selectUser);
+
+  const handleLogOut = () => {
+    dispatch(setUser({}));
+    sessionStorage.removeItem("authToken");
+    // document.getElementById("logInDiv").hidden = false;
+    navigate("/");
+  };
 
   return (
     <Navbar expand="lg" className="bg-body-tertiary">

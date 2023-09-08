@@ -16,6 +16,14 @@ const Guild = db.define("guild", {
     type: Sequelize.STRING,
     allowNull: false,
   },
+  description: {
+    type: Sequelize.STRING,
+    allowNull: true,
+  },
+  announcement: {
+    type: Sequelize.STRING,
+    allowNull: true,
+  },
 });
 
 module.exports = Guild;
