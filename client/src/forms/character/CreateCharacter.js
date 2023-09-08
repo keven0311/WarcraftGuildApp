@@ -14,25 +14,30 @@ import {
 function CreateCharacter() {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
-  const [name, setName] = useState("");
-  const [region, setRegion] = useState("");
-  const [server, setServer] = useState("");
-  const [characterClass, setCharacterClass] = useState("");
-  const [race, setRace] = useState("");
-  const [level, setLevel] = useState(0);
-  const [description, setDescription] = useState("");
+  const [info, setInfo] = useState({
+    name: "",
+    region: "",
+    server: "",
+    characterClass: "",
+    race: "",
+    level: 0,
+    description: "",
+  });
+
   const { validated, handleSubmit } = useCharacterForm(
     createCharacter({
-      name,
-      region,
-      server: server.toLowerCase(),
-      characterClass,
-      race,
-      level,
-      description,
+      ...info,
+      server: info.server.toLowerCase(),
       userId: user.id,
     })
   );
+
+  const handleChange = (e) => {
+    setInfo({
+      ...info,
+      [e.target.name]: e.target.value,
+    });
+  };
 
   useEffect(() => {
     if (Object.keys(user).length > 0) {
@@ -53,8 +58,8 @@ function CreateCharacter() {
           <Form.Label>Name</Form.Label>
           <Form.Control
             required
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            name="name"
+            onChange={handleChange}
             type="text"
             placeholder="name"
           />
@@ -62,8 +67,15 @@ function CreateCharacter() {
         </Form.Group>
         <Form.Group as={Col} md="4" controlId="validationCustom02">
           <Form.Label>Region</Form.Label>
-          <Form.Select required onChange={(e) => setRegion(e.target.value)}>
-            <option>Select a Region</option>
+          <Form.Select
+            required
+            defaultValue="defaultOptionValue"
+            name="region"
+            onChange={handleChange}
+          >
+            <option value="defaultOptionValue" disabled hidden>
+              Select a Region
+            </option>
             {characterRegion.map((region, idx) => (
               <option key={idx} value={region}>
                 {region}
@@ -75,8 +87,8 @@ function CreateCharacter() {
           <Form.Label>Server</Form.Label>
           <Form.Control
             required
-            value={server}
-            onChange={(e) => setServer(e.target.value)}
+            name="server"
+            onChange={handleChange}
             type="text"
             placeholder="server"
           />
@@ -86,9 +98,13 @@ function CreateCharacter() {
           <Form.Label>Class</Form.Label>
           <Form.Select
             required
-            onChange={(e) => setCharacterClass(e.target.value)}
+            defaultValue="defaultOptionValue"
+            name="characterClass"
+            onChange={handleChange}
           >
-            <option>Select a class</option>
+            <option value="defaultOptionValue" disabled hidden>
+              Select a class
+            </option>
             {characterClasses.map((characterClass, idx) => (
               <option key={idx} value={characterClass}>
                 {characterClass}
@@ -98,8 +114,15 @@ function CreateCharacter() {
         </Form.Group>
         <Form.Group as={Col} md="4" controlId="validationCustom02">
           <Form.Label>Race</Form.Label>
-          <Form.Select required onChange={(e) => setRace(e.target.value)}>
-            <option>Select a race</option>
+          <Form.Select
+            required
+            name="race"
+            defaultValue="defaultOptionValue"
+            onChange={handleChange}
+          >
+            <option value="defaultOptionValue" hidden disabled>
+              Select a race
+            </option>
             {characterRace.map((characterRace, idx) => (
               <option key={idx} value={characterRace}>
                 {characterRace}
@@ -110,8 +133,8 @@ function CreateCharacter() {
         <Form.Group as={Col} md="4" controlId="validationCustom02">
           <Form.Label>Level</Form.Label>
           <Form.Control
-            value={level}
-            onChange={(e) => setLevel(e.target.value)}
+            name="level"
+            onChange={handleChange}
             type="number"
             min="1"
             max="70"
@@ -123,9 +146,9 @@ function CreateCharacter() {
           <Form.Label>Description</Form.Label>
           <textarea
             className="form-control"
-            row="4"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
+            row={3}
+            name="description"
+            onChange={handleChange}
             type="text"
             placeholder="description"
           />

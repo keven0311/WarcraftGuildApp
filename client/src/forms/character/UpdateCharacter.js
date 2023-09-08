@@ -19,25 +19,30 @@ function UpdateCharacter() {
   const dispatch = useDispatch();
   const { username, character } = useParams();
   const targetCharacter = useSelector(selectSingleCharacter);
-  const [name, setName] = useState("");
-  const [region, setRegion] = useState("");
-  const [server, setServer] = useState("");
-  const [characterClass, setCharacterClass] = useState("");
-  const [race, setRace] = useState("");
-  const [level, setLevel] = useState(0);
-  const [description, setDescription] = useState("");
+  const [info, setInfo] = useState({
+    name: "",
+    region: "",
+    server: "",
+    characterClass: "",
+    race: "",
+    level: 0,
+    description: "",
+  });
+
+  const handleChange = (e) => {
+    setInfo({
+      ...info,
+      [e.target.name]: e.target.value,
+    });
+  };
+
   const { validated, handleSubmit } = useCharacterForm(
     updateCharacter({
       server: targetCharacter.server,
       name: targetCharacter.name,
       info: {
-        name,
-        region,
-        server: server.toLowerCase(),
-        characterClass,
-        race,
-        level,
-        description,
+        ...info,
+        server: info.server.toLowerCase(),
       },
     })
   );
@@ -45,13 +50,9 @@ function UpdateCharacter() {
   useEffect(() => {
     dispatch(fetchSingleCharacter(character));
     if (Object.keys(targetCharacter).length > 0) {
-      setName(targetCharacter.name);
-      setRegion(targetCharacter.region);
-      setServer(targetCharacter.server);
-      setCharacterClass(targetCharacter.characterClass);
-      setRace(targetCharacter.race);
-      setLevel(targetCharacter.level);
-      setDescription(targetCharacter.description);
+      setInfo({
+        ...targetCharacter,
+      });
     }
   }, [dispatch, character, targetCharacter.name, targetCharacter.server]);
 
@@ -68,8 +69,9 @@ function UpdateCharacter() {
           <Form.Label>Name</Form.Label>
           <Form.Control
             required
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            name="name"
+            defaultValue={info.name}
+            onChange={handleChange}
             type="text"
             placeholder="name"
           />
@@ -78,10 +80,14 @@ function UpdateCharacter() {
         <Form.Group as={Col} md="4" controlId="validationCustom02">
           <Form.Label>Region</Form.Label>
           <Form.Select
-            onChange={(e) => setRegion(e.target.value)}
-            value={region}
+            name="region"
+            value={info.region || "defaultOptionValue"}
+            onChange={handleChange}
           >
-            <option>Select a Region</option>
+            <option value="defaultOptionValue" disabled hidden>
+              Select a Region
+            </option>
+
             {characterRegion.map((region, idx) => (
               <option key={idx} value={region}>
                 {region}
@@ -93,8 +99,9 @@ function UpdateCharacter() {
           <Form.Label>Server</Form.Label>
           <Form.Control
             required
-            value={server}
-            onChange={(e) => setServer(e.target.value)}
+            name="server"
+            defaultValue={info.server}
+            onChange={handleChange}
             type="text"
             placeholder="server"
           />
@@ -103,10 +110,13 @@ function UpdateCharacter() {
         <Form.Group as={Col} md="4" controlId="validationCustom02">
           <Form.Label>Class</Form.Label>
           <Form.Select
-            onChange={(e) => setCharacterClass(e.target.value)}
-            value={characterClass}
+            name="characterClass"
+            value={info.characterClass || "defaultOptionValue"}
+            onChange={handleChange}
           >
-            <option>Select a class</option>
+            <option value="defaultOptionValue" disabled hidden>
+              Select a class
+            </option>
             {characterClasses.map((characterClass, idx) => (
               <option key={idx} value={characterClass}>
                 {characterClass}
@@ -116,8 +126,14 @@ function UpdateCharacter() {
         </Form.Group>
         <Form.Group as={Col} md="4" controlId="validationCustom02">
           <Form.Label>Race</Form.Label>
-          <Form.Select onChange={(e) => setRace(e.target.value)} value={race}>
-            <option>Select a race</option>
+          <Form.Select
+            name="race"
+            value={info.race || "defaultOptionValue"}
+            onChange={handleChange}
+          >
+            <option value="defaultOptionValue" disabled hidden>
+              Select a race
+            </option>
             {characterRace.map((characterRace, idx) => (
               <option key={idx} value={characterRace}>
                 {characterRace}
@@ -128,8 +144,9 @@ function UpdateCharacter() {
         <Form.Group as={Col} md="4" controlId="validationCustom02">
           <Form.Label>Level</Form.Label>
           <Form.Control
-            value={level}
-            onChange={(e) => setLevel(e.target.value)}
+            name="level"
+            defaultValue={info.level}
+            onChange={handleChange}
             type="number"
             min="1"
             max="70"
@@ -142,8 +159,9 @@ function UpdateCharacter() {
           <textarea
             className="form-control"
             rows="3"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
+            name="description"
+            defaultValue={info.description}
+            onChange={handleChange}
             type="text"
             placeholder="description"
           />

@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import { Button, Form, Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  fetchSingleGuild,
   getGuildUpdateStatus,
   resetUpdateStatus,
+  selectSingleGuild,
   updateGuild,
 } from "../../store/slices/guildSlice";
 import { toast, ToastContainer } from "react-toastify";
@@ -13,14 +15,24 @@ import { selectUser } from "../../store/slices/userSlice";
 function UpdateGuild() {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
+  const targetGuild = useSelector(selectSingleGuild);
   const { name } = useParams();
   const [validated, setValidated] = useState(false);
-  const [guildName, setGuildName] = useState(name);
-  const [region, setRegion] = useState("");
-  const [server, setServer] = useState("");
-  const [description, setDescription] = useState("");
-  const [ownerEmail, setOwnerEmail] = useState("");
   const updateStatus = useSelector(getGuildUpdateStatus);
+  const [info, setInfo] = useState({
+    name: "",
+    region: "",
+    server: "",
+    description: "",
+    ownerEmail: "",
+  });
+
+  const handleChange = (e) => {
+    setInfo({
+      ...info,
+      [e.target.name]: e.target.value,
+    });
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -33,17 +45,25 @@ function UpdateGuild() {
         updateGuild({
           name: name,
           info: {
-            name: guildName,
-            region,
-            server: server.toLowerCase(),
-            description,
-            ownerEmail: ownerEmail === "" ? user?.email : ownerEmail,
+            ...info,
+            server: info.server.toLowerCase(),
+            ownerEmail: info.ownerEmail === "" ? user?.email : info.ownerEmail,
           },
         })
       );
     }
     setValidated(true);
   };
+
+  useEffect(() => {
+    dispatch(fetchSingleGuild(name));
+    if (Object.keys(targetGuild).length > 0) {
+      setInfo({
+        ...targetGuild,
+      });
+      console.log("useEffect if statement log called!");
+    }
+  }, [dispatch, name, targetGuild.name, targetGuild.server]);
 
   useEffect(() => {
     if (updateStatus) {
@@ -64,8 +84,9 @@ function UpdateGuild() {
           <Form.Label>Name</Form.Label>
           <Form.Control
             required
-            value={guildName}
-            onChange={(e) => setGuildName(e.target.value)}
+            name="name"
+            defaultValue={info.name}
+            onChange={handleChange}
             type="text"
             placeholder="name"
           />
@@ -73,8 +94,14 @@ function UpdateGuild() {
         </Form.Group>
         <Form.Group as={Col} md="4" controlId="validationCustom02">
           <Form.Label>Region</Form.Label>
-          <Form.Select onChange={(e) => setRegion(e.target.value)}>
-            <option>Select a region</option>
+          <Form.Select
+            name="region"
+            value={info.region || "defaultOptionValue"}
+            onChange={handleChange}
+          >
+            <option value="defaultOptionValue" disabled hidden>
+              Select a region
+            </option>
             <option value={"US"}>US</option>
             <option value={"Asia"}>Asia</option>
             <option value={"EU"}>EU</option>
@@ -87,8 +114,9 @@ function UpdateGuild() {
           <Form.Label>Server</Form.Label>
           <Form.Control
             required
-            value={server}
-            onChange={(e) => setServer(e.target.value)}
+            name="server"
+            defaultValue={info.server}
+            onChange={handleChange}
             type="text"
             placeholder="server"
           />
@@ -99,8 +127,9 @@ function UpdateGuild() {
           <textarea
             className="form-control"
             rows={3}
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
+            name="description"
+            defaultValue={info.description}
+            onChange={handleChange}
             type="text"
             placeholder="description"
           />
@@ -109,8 +138,9 @@ function UpdateGuild() {
         <Form.Group as={Col} md="4" controlId="validationCustom02">
           <Form.Label>Owner Email</Form.Label>
           <Form.Control
-            value={ownerEmail}
-            onChange={(e) => setOwnerEmail(e.target.value)}
+            name="ownerEmail"
+            defaultValue={info.ownerEmail}
+            onChange={handleChange}
             type="text"
             placeholder="ownerEmail"
           />

@@ -11,12 +11,22 @@ import { ToastContainer, toast } from "react-toastify";
 function CreateGuild() {
   const dispatch = useDispatch();
   const [validated, setValidated] = useState(false);
-  const [name, setName] = useState("");
-  const [region, setRegion] = useState("");
-  const [server, setServer] = useState("");
-  const [description, setDescription] = useState("");
-  const [ownerEmail, setOwnerEmail] = useState("");
   const createStatus = useSelector(getGuildCreateStatus);
+
+  const [info, setInfo] = useState({
+    name: "",
+    region: "",
+    server: "",
+    description: "",
+    ownerEmail: "",
+  });
+
+  const handleChange = (e) => {
+    setInfo({
+      ...info,
+      [e.target.name]: e.target.value,
+    });
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -24,9 +34,7 @@ function CreateGuild() {
     if (form.checkValidity() === false) {
       event.stopPropagation();
     } else {
-      await dispatch(
-        createGuild({ name, region, server, description, ownerEmail })
-      );
+      await dispatch(createGuild(info));
     }
     setValidated(true);
   };
@@ -50,8 +58,8 @@ function CreateGuild() {
           <Form.Label>Name</Form.Label>
           <Form.Control
             required
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            name="name"
+            onChange={handleChange}
             type="text"
             placeholder="name"
           />
@@ -59,8 +67,14 @@ function CreateGuild() {
         </Form.Group>
         <Form.Group as={Col} md="4" controlId="validationCustom02">
           <Form.Label>Region</Form.Label>
-          <Form.Select onChange={(e) => setRegion(e.target.value)}>
-            <option>Select a region</option>
+          <Form.Select
+            name="region"
+            defaultValue="defaultOptionValue"
+            onChange={handleChange}
+          >
+            <option value="defaultOptionValue" disabled hidden>
+              Select a region
+            </option>
             <option value={"US"}>US</option>
             <option value={"Asia"}>Asia</option>
             <option value={"EU"}>EU</option>
@@ -73,8 +87,8 @@ function CreateGuild() {
           <Form.Label>Server</Form.Label>
           <Form.Control
             required
-            value={server}
-            onChange={(e) => setServer(e.target.value)}
+            name="server"
+            onChange={handleChange}
             type="text"
             placeholder="server"
           />
@@ -82,10 +96,11 @@ function CreateGuild() {
         </Form.Group>
         <Form.Group as={Col} md="4" controlId="validationCustom02">
           <Form.Label>Description</Form.Label>
-          <Form.Control
-            required
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
+          <textarea
+            className="form-control"
+            rows={3}
+            name="description"
+            onChange={handleChange}
             type="text"
             placeholder="description"
           />
@@ -95,10 +110,10 @@ function CreateGuild() {
           <Form.Label>Owner Email</Form.Label>
           <Form.Control
             required
-            value={ownerEmail}
-            onChange={(e) => setOwnerEmail(e.target.value)}
+            name="ownerEmail"
+            onChange={handleChange}
             type="text"
-            placeholder="ownerEmail"
+            placeholder="Guild Owner Email"
           />
           <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
         </Form.Group>
