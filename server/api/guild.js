@@ -1,11 +1,18 @@
 const express = require("express");
 const router = express.Router();
 
-const { Guild } = require("../db");
+const { Guild, Character } = require("../db");
 
 router.get("/", async (req, res, next) => {
   try {
-    const guilds = await Guild.findAll();
+    const guilds = await Guild.findAll({
+      include: [
+        {
+          model: Character,
+          as: "characters",
+        },
+      ],
+    });
     res.json(guilds);
   } catch (err) {
     next(err);
@@ -20,6 +27,21 @@ router.get("/:name", async (req, res, next) => {
     res.json(guild);
   } catch (err) {
     next(err);
+  }
+});
+
+router.get("/id/:id", async (req, res, next) => {
+  try {
+    const guild = await Guild.findOne({
+      where: { id: req.params.id },
+    });
+    if (guild) {
+      res.json(guild);
+    } else {
+      res.status(404).json("Guild not found!");
+    }
+  } catch (error) {
+    next(error);
   }
 });
 

@@ -22,6 +22,18 @@ export const fetchSingleGuild = createAsyncThunk(
   }
 );
 
+export const fetchSingleGuildById = createAsyncThunk(
+  "get/singleGuildById",
+  async (id) => {
+    try {
+      const { data } = await axios.get(`/api/guild/id/${id}`);
+      return data;
+    } catch (error) {
+      return error.message;
+    }
+  }
+);
+
 export const createGuild = createAsyncThunk("createGuild", async (info) => {
   try {
     const { data } = await axios.post("/api/guild", info);
@@ -74,6 +86,9 @@ const guildSlice = createSlice({
       state.allguild = action.payload;
     });
     builder.addCase(fetchSingleGuild.fulfilled, (state, action) => {
+      state.singleguild = action.payload;
+    });
+    builder.addCase(fetchSingleGuildById.fulfilled, (state, action) => {
       state.singleguild = action.payload;
     });
     builder

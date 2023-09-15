@@ -3,7 +3,10 @@ const User = require("./models/User");
 const Guild = require("./models/Guild");
 const Character = require("./models/Character");
 
-Guild.hasMany(Character);
+Guild.hasMany(Character, {
+  foreignKey: "guildId",
+  as: "characters",
+});
 User.hasMany(Character);
 Character.belongsTo(Guild);
 Character.belongsTo(User);

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAllGuilds, selectAllGuilds } from "../../store/slices/guildSlice";
 import "../../styles/allGuilds.css";
@@ -14,7 +14,7 @@ function AllGuilds() {
 
   return (
     <Container className="my-3">
-      {allGuilds.length > 0 ? (
+      {allGuilds && allGuilds.length > 0 ? (
         <Row>
           <table>
             <thead>
@@ -32,7 +32,7 @@ function AllGuilds() {
                   <td>{guild.name}</td>
                   <td>{guild.region}</td>
                   <td>{guild.server}</td>
-                  <td>0</td>
+                  <td>{guild.characters?.length}</td>
                   <td>
                     <Button
                       variant="outline-primary"

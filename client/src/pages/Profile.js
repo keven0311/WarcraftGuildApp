@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -6,10 +6,12 @@ import {
   getCharacterDeleteStatus,
   getUserCharacters,
   selectUserCharacters,
+  updateCharacter,
 } from "../store/slices/characterSlice";
 import { getUserInfo, selectUser } from "../store/slices/userSlice";
 import { useParams } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
+import { fetchAllGuilds, selectAllGuilds } from "../store/slices/guildSlice";
 
 function Profile() {
   const dispatch = useDispatch();
@@ -17,6 +19,8 @@ function Profile() {
   const user = useSelector(selectUser);
   const userCharacters = useSelector(selectUserCharacters);
   const deleteStatus = useSelector(getCharacterDeleteStatus);
+  const allGuild = useSelector(selectAllGuilds);
+  const [isUpdated, setIsUpdated] = useState(false);
 
   const handleDeleteCharacter = async (server, name) => {
     await dispatch(
@@ -27,18 +31,41 @@ function Profile() {
     );
   };
 
+  const handleLeaveGuild = (server, name) => {
+    dispatch(
+      updateCharacter({
+        server,
+        name,
+        info: {
+          guildId: null,
+        },
+      })
+    );
+    setIsUpdated(!isUpdated);
+  };
+
+  const getTargetGuildName = (guildId) => {
+    const target = allGuild?.filter((guild) => guild.id === guildId);
+    if (target.length > 0) {
+      return target[0].name;
+    } else {
+      return " ";
+    }
+  };
+
   useEffect(() => {
     if (Object.keys(user).length > 0) {
       dispatch(getUserInfo(name));
       if (user.id) {
         dispatch(getUserCharacters(user.id));
+        dispatch(fetchAllGuilds());
       }
     }
-  }, [dispatch, name, user.id]);
+  }, [dispatch, name, user.id, isUpdated]);
 
   useEffect(() => {
     if (deleteStatus) {
-      toast(deleteStatus);
+      toast.success(deleteStatus);
     }
     if (user.id) {
       dispatch(getUserCharacters(user.id));
@@ -66,6 +93,7 @@ function Profile() {
               <th>Class</th>
               <th>Race</th>
               <th>Level</th>
+              <th>Guild</th>
               <th>Description</th>
               <th>Actions</th>
             </tr>
@@ -79,6 +107,11 @@ function Profile() {
                   <td>{character.characterClass}</td>
                   <td>{character.race}</td>
                   <td>{character.level}</td>
+                  <td>
+                    {character.guildId
+                      ? getTargetGuildName(character.guildId)
+                      : " "}
+                  </td>
                   <td>{character.description}</td>
                   <td>
                     <Button
@@ -87,6 +120,21 @@ function Profile() {
                     >
                       Edit
                     </Button>
+                    {character.guildId ? (
+                      <Button
+                        variant="outline-primary"
+                        onClick={() =>
+                          handleLeaveGuild(character.server, character.name)
+                        }
+                      >
+                        Leave Guild
+                      </Button>
+                    ) : (
+                      <Button disabled variant="outline-secondary">
+                        Leave Guild
+                      </Button>
+                    )}
+
                     <Button
                       variant="outline-primary"
                       onClick={() =>

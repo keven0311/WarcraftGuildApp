@@ -6,15 +6,24 @@ import {
   fetchSingleCharacterById,
   selectSingleCharacter,
 } from "../../store/slices/characterSlice";
+import {
+  fetchSingleGuildById,
+  selectSingleGuild,
+} from "../../store/slices/guildSlice";
 
 function SingleCharacter() {
   const dispatch = useDispatch();
   const { id } = useParams();
   const character = useSelector(selectSingleCharacter);
+  const characterGuild = useSelector(selectSingleGuild);
 
   useEffect(() => {
     dispatch(fetchSingleCharacterById(id));
-  }, [dispatch, id]);
+    if (character.guildId) {
+      dispatch(fetchSingleGuildById(character.guildId));
+    }
+  }, [dispatch, id, character.guildId]);
+
   return (
     <Container>
       {character && Object.keys(character).length > 0 ? (
@@ -36,6 +45,12 @@ function SingleCharacter() {
             <Row>Class: {character.characterClass}</Row>
             <Row>Race: {character.race}</Row>
             <Row>Level: {character.level}</Row>
+            <Row>
+              Guild:{" "}
+              {Object.keys(characterGuild).length > 0
+                ? characterGuild.name
+                : "NO GUILD"}
+            </Row>
             <Row>Note: {character.description}</Row>
             <Row>Contact: {character.contact}</Row>
             <Row>
