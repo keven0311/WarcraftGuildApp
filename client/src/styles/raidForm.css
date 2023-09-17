@@ -1,0 +1,71 @@
+.character_container{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.character{
+    height: 3rem;
+    width: 7rem;
+    margin: 2px;
+    text-align: center;
+    font-weight: 600;
+    border: 1px solid rgba(80,80,80,0.3) ;
+}
+
+.team{
+    width: 37rem;
+    height:3.5rem;
+    border: 1px solid rgba(80,80,80,0.3);
+}
+
+.Paladin{
+    background-color: rgba(244,140,186);
+}
+
+.Evoker{
+    background-color: rgba(51,147,127);
+}
+
+.Priest{
+    background-color: rgba(255,255,255);
+}
+
+.Death_Knight{
+    background-color: rgba(196,30,58);
+}
+
+.Demon_Hunter{
+    background-color: rgba(163,48,201);
+}
+
+.Druid{
+    background-color: rgba(255,124,10);
+}
+
+.Hunter{
+    background-color: rgba(170,211,114);
+}
+
+.Mage{
+    background-color: rgba(63,199,235);
+}
+
+.Monk{
+    background-color: rgba(0,255,152);
+}
+
+.Rogue{
+    background-color: rgba(255,244,104);
+}
+
+.Shaman{
+    background-color: rgba(0,112,221);
+}
+
+.Warlock{
+    background-color: rgba(135,136,238);
+}
+
+.Warrior{
+    background-color: rgba(198,155,109);
+}

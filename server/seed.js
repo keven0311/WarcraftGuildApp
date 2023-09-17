@@ -38,7 +38,7 @@ const seed = async () => {
       ownerEmail: "kaichongapi@gmail.com",
     });
     await Character.create({
-      name: "character one",
+      name: "one",
       region: "us",
       server: "illidan",
       characterClass: "Death Knight",
@@ -50,7 +50,7 @@ const seed = async () => {
       userId: 3,
     });
     await Character.create({
-      name: "character two",
+      name: "two",
       region: "cn",
       server: "illidan",
       characterClass: "Rogue",
@@ -62,7 +62,7 @@ const seed = async () => {
       userId: 3,
     });
     await Character.create({
-      name: "character three",
+      name: "three",
       region: "eu",
       server: "illidan",
       characterClass: "Mage",
@@ -74,14 +74,206 @@ const seed = async () => {
       userId: 3,
     });
     await Character.create({
-      name: "character four",
-      region: "kr",
+      name: "four",
+      region: "us",
       server: "illidan",
       characterClass: "Demon Hunter",
       race: "Dwarf",
       // level:   test see if its 70 by default
       contact: "memberfour@gmail.com",
       description: "4th character",
+      guildId: 1,
+      userId: 3,
+    });
+    await Character.create({
+      name: "five",
+      region: "kr",
+      server: "illidan",
+      characterClass: "Mage",
+      race: "Dwarf",
+      // level:   test see if its 70 by default
+      contact: "memberfour@gmail.com",
+      description: "5th character",
+      guildId: 1,
+      userId: 3,
+    });
+    await Character.create({
+      name: "six",
+      region: "cn",
+      server: "illidan",
+      characterClass: "Death Knight",
+      race: "Dwarf",
+      // level:   test see if its 70 by default
+      contact: "memberfour@gmail.com",
+      description: "6th character",
+      guildId: 1,
+      userId: 3,
+    });
+    await Character.create({
+      name: "seven",
+      region: "cn",
+      server: "illidan",
+      characterClass: "Paladin",
+      race: "Dwarf",
+      // level:   test see if its 70 by default
+      contact: "memberfour@gmail.com",
+      description: "7th character",
+      guildId: 1,
+      userId: 3,
+    });
+    await Character.create({
+      name: "eight",
+      region: "cn",
+      server: "illidan",
+      characterClass: "Rogue",
+      race: "Human",
+      // level:   test see if its 70 by default
+      contact: "memberfour@gmail.com",
+      description: "8th character",
+      guildId: 1,
+      userId: 3,
+    });
+    await Character.create({
+      name: "nine",
+      region: "cn",
+      server: "illidan",
+      characterClass: "Evoker",
+      race: "Dwarf",
+      // level:   test see if its 70 by default
+      contact: "memberfour@gmail.com",
+      description: "9th character",
+      guildId: 1,
+      userId: 3,
+    });
+    await Character.create({
+      name: "ten",
+      region: "cn",
+      server: "illidan",
+      characterClass: "Hunter",
+      race: "Dwarf",
+      // level:   test see if its 70 by default
+      contact: "memberfour@gmail.com",
+      description: "10th character",
+      guildId: 1,
+      userId: 3,
+    });
+    await Character.create({
+      name: "eleven",
+      region: "cn",
+      server: "illidan",
+      characterClass: "Shaman",
+      race: "Dwarf",
+      // level:   test see if its 70 by default
+      contact: "memberfour@gmail.com",
+      description: "11th character",
+      guildId: 1,
+      userId: 3,
+    });
+    await Character.create({
+      name: "twelve",
+      region: "cn",
+      server: "illidan",
+      characterClass: "Death Knight",
+      race: "Dwarf",
+      // level:   test see if its 70 by default
+      contact: "memberfour@gmail.com",
+      description: "12th character",
+      guildId: 1,
+      userId: 3,
+    });
+    await Character.create({
+      name: "thirteen",
+      region: "cn",
+      server: "illidan",
+      characterClass: "Warrior",
+      race: "Dwarf",
+      // level:   test see if its 70 by default
+      contact: "memberfour@gmail.com",
+      description: "13th character",
+      guildId: 1,
+      userId: 3,
+    });
+    await Character.create({
+      name: "fourteen",
+      region: "cn",
+      server: "illidan",
+      characterClass: "Warlock",
+      race: "Dwarf",
+      // level:   test see if its 70 by default
+      contact: "memberfour@gmail.com",
+      description: "14th character",
+      guildId: 1,
+      userId: 3,
+    });
+    await Character.create({
+      name: "fifteen",
+      region: "cn",
+      server: "illidan",
+      characterClass: "Druid",
+      race: "Dwarf",
+      // level:   test see if its 70 by default
+      contact: "memberfour@gmail.com",
+      description: "15th character",
+      guildId: 1,
+      userId: 3,
+    });
+    await Character.create({
+      name: "sixteen",
+      region: "cn",
+      server: "illidan",
+      characterClass: "Monk",
+      race: "Dwarf",
+      // level:   test see if its 70 by default
+      contact: "memberfour@gmail.com",
+      description: "16th character",
+      guildId: 1,
+      userId: 3,
+    });
+    await Character.create({
+      name: "seventeen",
+      region: "cn",
+      server: "illidan",
+      characterClass: "Mage",
+      race: "Dwarf",
+      // level:   test see if its 70 by default
+      contact: "memberfour@gmail.com",
+      description: "17th character",
+      guildId: 1,
+      userId: 3,
+    });
+    await Character.create({
+      name: "eighteen",
+      region: "cn",
+      server: "illidan",
+      characterClass: "Warrior",
+      race: "Dwarf",
+      // level:   test see if its 70 by default
+      contact: "memberfour@gmail.com",
+      description: "18th character",
+      guildId: 1,
+      userId: 3,
+    });
+    await Character.create({
+      name: "nineteen",
+      region: "cn",
+      server: "illidan",
+      characterClass: "Warrior",
+      race: "Dwarf",
+      // level:   test see if its 70 by default
+      contact: "memberfour@gmail.com",
+      description: "19th character",
+      guildId: 1,
+      userId: 3,
+    });
+    await Character.create({
+      name: "twenty",
+      region: "cn",
+      server: "illidan",
+      characterClass: "Monk",
+      race: "Dwarf",
+      // level:   test see if its 70 by default
+      contact: "memberfour@gmail.com",
+      description: "20th character",
       guildId: 1,
       userId: 3,
     });

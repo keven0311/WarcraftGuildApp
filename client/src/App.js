@@ -18,6 +18,9 @@ import UpdateCharacter from "./forms/character/UpdateCharacter";
 import SingleCharacter from "./pages/character/SingleCharacter";
 import EnrollGuild from "./forms/character/EnrollGuild";
 import UpdateGuild from "./forms/guild/UpdateGuild";
+import Raidform from "./components/Raidform";
+import RaidGroupDND from "./components/RaidGroupDND";
+import TestRaidDND from "./components/TestRaidDND";
 const GOOGLE_CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID;
 
 function App() {
@@ -77,6 +80,8 @@ function App() {
         />
         <Route path="/character/:id" element={<SingleCharacter />} />
         <Route path="/guild/:name/enroll" element={<EnrollGuild />} />
+        <Route path="/guild/:id/raidform" element={<Raidform />} />
+        <Route path="/test" element={<TestRaidDND />} />
       </Routes>
     </div>
   );

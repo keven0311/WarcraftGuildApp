@@ -31,7 +31,9 @@ export const fetchGuildCharacters = createAsyncThunk(
     try {
       const { data } = await axios.get(`/api/character/guild/${id}`);
       return data;
-    } catch (error) {}
+    } catch (error) {
+      return error.message;
+    }
   }
 );
 

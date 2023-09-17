@@ -41,6 +41,7 @@ function EnrollGuild() {
 
   return (
     <Container className="mt-4">
+      <h1>{name}</h1>
       <div className="d-flex  mb-2 flex-nowrap ">
         <InputGroup className="d-flex align-content-stretch">
           <div className="input-group-prepend d-flex align-content-stretch">

@@ -59,6 +59,14 @@ function SingleGuild() {
           <Button variant="primary" href="/guild">
             Go back
           </Button>
+          <Col>
+            <Button
+              variant="outline-primary"
+              href={`/guild/${guild.id}/raidform`}
+            >
+              Raid form
+            </Button>
+          </Col>
         </Col>
       </Row>
       {guild.announcement && (
