@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const { Guild, Character } = require("../db");
+const { Guild, Character, RaidForm } = require("../db");
 
 router.get("/", async (req, res, next) => {
   try {
@@ -10,6 +10,9 @@ router.get("/", async (req, res, next) => {
         {
           model: Character,
           as: "characters",
+        },
+        {
+          model: RaidForm,
         },
       ],
     });
@@ -23,6 +26,11 @@ router.get("/:name", async (req, res, next) => {
   try {
     const guild = await Guild.findOne({
       where: { name: req.params.name },
+      include: [
+        {
+          model: RaidForm,
+        },
+      ],
     });
     res.json(guild);
   } catch (err) {

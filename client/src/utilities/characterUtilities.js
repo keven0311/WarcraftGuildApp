@@ -32,3 +32,9 @@ export const characterRace = [
 ];
 
 export const characterRegion = ["us", "eu", "cn", "tw", "kr"];
+
+//convert character class: replacing space to "_" for css:
+export const characterClassCSS = (characterClass) => {
+  const characterClassForCSS = characterClass.split(" ").join("_");
+  return characterClassForCSS;
+};

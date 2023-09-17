@@ -80,7 +80,7 @@ function App() {
         />
         <Route path="/character/:id" element={<SingleCharacter />} />
         <Route path="/guild/:name/enroll" element={<EnrollGuild />} />
-        <Route path="/guild/:id/raidform" element={<Raidform />} />
+        <Route path="/guild/:id/raidform/create" element={<Raidform />} />
         <Route path="/test" element={<TestRaidDND />} />
       </Routes>
     </div>

@@ -24,7 +24,7 @@ function Raidform() {
 
   return (
     <div>
-      <h2 className="d-flex justify-content-center">Raid form</h2>
+      <h2 className="d-flex justify-content-center">Create Raid form</h2>
       <RaidGroupDND characters={characters} />
     </div>
   );

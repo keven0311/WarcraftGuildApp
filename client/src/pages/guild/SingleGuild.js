@@ -62,9 +62,9 @@ function SingleGuild() {
           <Col>
             <Button
               variant="outline-primary"
-              href={`/guild/${guild.id}/raidform`}
+              href={`/guild/${guild.id}/raidform/create`}
             >
-              Raid form
+              Create Raid form
             </Button>
           </Col>
         </Col>

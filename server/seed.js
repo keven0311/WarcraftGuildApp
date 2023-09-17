@@ -1,4 +1,4 @@
-const { db, User, Guild, Character } = require("./db");
+const { db, User, Guild, Character, RaidForm } = require("./db");
 
 const seed = async () => {
   try {
@@ -276,6 +276,20 @@ const seed = async () => {
       description: "20th character",
       guildId: 1,
       userId: 3,
+    });
+
+    await RaidForm.create({
+      time: new Date(),
+      groupOne: [1, 2, 3, 4, 5],
+      groupTwo: [6, 7, 8, 9, 10],
+      groupThree: [11, 12, 13, 14, 15],
+      groupFour: [16, 17, 18, 19, 20],
+      raidCharactersId: [
+        1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+      ],
+      description: "first raid form ever",
+      // guildName: "sampleGuild",
+      guildId: 1,
     });
   } catch (err) {
     console.error(err.message);
