@@ -43,6 +43,20 @@ Libaraies:
 
 ![home_page](https://github.com/keven0311/WarcraftGuildApp/blob/main/client/screenshots/home_page.png)
 
+![all_guilds](https://github.com/keven0311/WarcraftGuildApp/blob/main/client/screenshots/allguilds.png)
+![guild_create_form](https://github.com/keven0311/WarcraftGuildApp/blob/main/client/screenshots/guild_create_form.png)
+![single_guild_view](https://github.com/keven0311/WarcraftGuildApp/blob/main/client/screenshots/single_guild_view.png)
+![single_guild_owner_view](https://github.com/keven0311/WarcraftGuildApp/blob/main/client/screenshots/single_guild_owner_view.png)
+![guild_update_form](https://github.com/keven0311/WarcraftGuildApp/blob/main/client/screenshots/guild_update_form.png)
+![guild_addCharacter_form](https://github.com/keven0311/WarcraftGuildApp/blob/main/client/screenshots/guild_addCharacter_form.png)
+![guild_announcement_modal](https://github.com/keven0311/WarcraftGuildApp/blob/main/client/screenshots/guild_announcement_modal.png)
+![raidform_dnd_create](https://github.com/keven0311/WarcraftGuildApp/blob/main/client/screenshots/raidform_dnd_create.png)
+![raidform_view](https://github.com/keven0311/WarcraftGuildApp/blob/main/client/screenshots/raidform_view.png)
+![single_character_view](https://github.com/keven0311/WarcraftGuildApp/blob/main/client/screenshots/singleCharacter_view.png)
+![user_profile_page](https://github.com/keven0311/WarcraftGuildApp/blob/main/client/screenshots/user_profile_page.png)
+![user_profile_createCharacter_form](https://github.com/keven0311/WarcraftGuildApp/blob/main/client/screenshots/user_profile_createCharacter_form.png)
+![user_profile_updateCharacter_form](https://github.com/keven0311/WarcraftGuildApp/blob/main/client/screenshots/user_profile_updateCharacter_form.png)
+
 # Contact
 
     Kaichong Lin
