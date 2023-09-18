@@ -13,21 +13,23 @@ WarcraftGuild is your go-to web app for effortlessly managing your World of Warc
 # Development Technologies
 
 STACKS:
-PostgreSQL
-Express.js
-React.js
-Node.js
+
+        PostgreSQL
+        Express.js
+        React.js
+        Node.js
 
 Libaraies:
-Front end:
-bootstrap
-dotenv
-axios
-react-Redux
-react-Toastify
-react-Router-Dom
-react-Beautiful-Dnd
-jwt-decode
+
+    Front end:
+        bootstrap
+        dotenv
+        axios
+        react-Redux
+        react-Toastify
+        react-Router-Dom
+        react-Beautiful-Dnd
+        jwt-decode
 
     Back end:
         dotenv
@@ -39,7 +41,7 @@ jwt-decode
 
 # Application screen shots
 
-![home_page](../WarcraftGuildApp/client/src/images/screenshots/home_page.png)
+![home_page](/WarcraftGuildApp/client/screenshots/home_page.png)
 
 # Contact
 
