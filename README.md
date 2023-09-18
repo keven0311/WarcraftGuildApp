@@ -41,7 +41,7 @@ Libaraies:
 
 # Application screen shots
 
-![home_page](/WarcraftGuildApp/client/screenshots/home_page.png)
+![home_page](https://github.com/keven0311/WarcraftGuildApp/blob/main/client/screenshots/home_page.png)
 
 # Contact
 
