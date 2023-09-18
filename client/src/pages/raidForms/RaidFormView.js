@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import "../../styles/raidForm.css";
-import { Container } from "react-bootstrap";
+import { Button, Container } from "react-bootstrap";
 import RaidFormGroup from "../../components/RaidFormGroup";
 import { useDispatch, useSelector } from "react-redux";
 import { getGuildAllRaidForms } from "../../store/slices/raidFormSlice";
@@ -62,8 +62,10 @@ function RaidFormView() {
         ) : (
           <p>No raid forms assigned...</p>
         )}
-        {}
       </div>
+      <Button variant="outline-primary" href={`/guild/${guild.name}`}>
+        Go back
+      </Button>
     </Container>
   );
 }

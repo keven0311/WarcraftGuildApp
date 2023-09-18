@@ -22,6 +22,8 @@ function Profile() {
   const allGuild = useSelector(selectAllGuilds);
   const [isUpdated, setIsUpdated] = useState(false);
 
+  console.log(user);
+
   const handleDeleteCharacter = async (server, name) => {
     await dispatch(
       deleteCharacter({

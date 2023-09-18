@@ -15,8 +15,8 @@ function Home() {
           members here and beat bosses and mythic dungeons together!🏃‍♂️
         </p>
         <div>
-          <button className="home_left_button" href="/guild">
-            Guilds
+          <button className="home_left_button">
+            <a href="/guild">Guilds</a>
           </button>
         </div>
       </div>

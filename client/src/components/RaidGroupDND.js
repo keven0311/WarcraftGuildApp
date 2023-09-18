@@ -5,9 +5,17 @@ import RaidFormSubmit from "./RaidFormSubmit";
 import { characterClassCSS } from "../utilities/characterUtilities";
 import RaidFormTime from "./RaidFormTime";
 import { useParams } from "react-router-dom";
+import { Button } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  fetchSingleGuildById,
+  selectSingleGuild,
+} from "../store/slices/guildSlice";
 
 function RaidGroupDND({ characters }) {
   const { id } = useParams();
+  const dispatch = useDispatch();
+  const guild = useSelector(selectSingleGuild);
   const [dndgroups, setDndGroups] = useState({
     groupOne: {
       name: "Group 1",
@@ -126,6 +134,10 @@ function RaidGroupDND({ characters }) {
     });
   }, [characters]);
 
+  useEffect(() => {
+    dispatch(fetchSingleGuildById(id));
+  }, [dispatch, id]);
+
   return (
     <>
       <div
@@ -219,6 +231,13 @@ function RaidGroupDND({ characters }) {
           <textarea onChange={(e) => setDescription(e.target.value)} />
         </div>
         <RaidFormSubmit info={info} />
+        <Button
+          className="mx-3"
+          variant="outline-primary"
+          href={`/guild/${guild.name}`}
+        >
+          Go back
+        </Button>
       </div>
     </>
   );

@@ -60,7 +60,7 @@
     font-size: 1.5rem;
     font-weight: 800;
     color: rgba(99,52,168);
-    transition: background 1s, transform 1s;
+    transition:  transform 1s;
 }
 
 .home_left_button:hover {
