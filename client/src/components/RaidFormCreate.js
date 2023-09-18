@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import "../styles/raidForm.css";
-import { Button, Container, Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import {
   fetchGuildCharacters,
@@ -9,7 +8,7 @@ import {
 import { useParams } from "react-router-dom";
 import RaidGroupDND from "./RaidGroupDND";
 
-function Raidform() {
+function RaidFormCreate() {
   const dispatch = useDispatch();
   const { id } = useParams();
   const reduxCharacters = useSelector(getSingleGuildCharacters);
@@ -30,4 +29,4 @@ function Raidform() {
   );
 }
 
-export default Raidform;
+export default RaidFormCreate;

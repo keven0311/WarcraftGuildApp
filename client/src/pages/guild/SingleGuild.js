@@ -40,8 +40,8 @@ function SingleGuild() {
       <Row className="my-3">
         <Col>
           <h1>{guild?.name}</h1>
-          <h5>{guild?.region}</h5>
-          <h5>{guild?.server}</h5>
+          <h4>{guild?.region}</h4>
+          <h4>{guild?.server}</h4>
           {guild.description && <h6>About: {guild?.description}</h6>}
         </Col>
         <Col>
@@ -54,19 +54,22 @@ function SingleGuild() {
                 Edit Guild Info
               </Button>
               <AnnouncementButton guildName={guild.name} />
+              <Button
+                variant="secondary"
+                href={`/guild/${guild.id}/raidform/create`}
+              >
+                Create Raid form
+              </Button>
             </>
           ) : null}
-          <Button variant="primary" href="/guild">
-            Go back
-          </Button>
           <Col>
-            <Button
-              variant="outline-primary"
-              href={`/guild/${guild.id}/raidform/create`}
-            >
-              Create Raid form
+            <Button variant="primary" href={`/guild/${guild.name}/raidform`}>
+              Raid forms
             </Button>
           </Col>
+          <Button variant="outline-primary" href="/guild">
+            Go back
+          </Button>
         </Col>
       </Row>
       {guild.announcement && (

@@ -43,7 +43,7 @@ const seed = async () => {
       server: "illidan",
       characterClass: "Death Knight",
       race: "Human",
-      // level:   test see if its 70 by default
+      level: 70,
       contact: "memberone@gmail.com",
       description: "the first character ever",
       guildId: 1,
@@ -55,7 +55,6 @@ const seed = async () => {
       server: "illidan",
       characterClass: "Rogue",
       race: "Orc",
-      // level:   test see if its 70 by default
       contact: "membertwo@gmail.com",
       description: "second character",
       guildId: 1,
@@ -67,7 +66,6 @@ const seed = async () => {
       server: "illidan",
       characterClass: "Mage",
       race: "Orc",
-      // level:   test see if its 70 by default
       contact: "memberthree@gmail.com",
       description: "3rd character",
       guildId: 1,
@@ -79,7 +77,6 @@ const seed = async () => {
       server: "illidan",
       characterClass: "Demon Hunter",
       race: "Dwarf",
-      // level:   test see if its 70 by default
       contact: "memberfour@gmail.com",
       description: "4th character",
       guildId: 1,
@@ -91,8 +88,7 @@ const seed = async () => {
       server: "illidan",
       characterClass: "Mage",
       race: "Dwarf",
-      // level:   test see if its 70 by default
-      contact: "memberfour@gmail.com",
+      contact: "memberfive@gmail.com",
       description: "5th character",
       guildId: 1,
       userId: 3,
@@ -103,8 +99,7 @@ const seed = async () => {
       server: "illidan",
       characterClass: "Death Knight",
       race: "Dwarf",
-      // level:   test see if its 70 by default
-      contact: "memberfour@gmail.com",
+      contact: "membersix@gmail.com",
       description: "6th character",
       guildId: 1,
       userId: 3,
@@ -115,8 +110,7 @@ const seed = async () => {
       server: "illidan",
       characterClass: "Paladin",
       race: "Dwarf",
-      // level:   test see if its 70 by default
-      contact: "memberfour@gmail.com",
+      contact: "memberseven@gmail.com",
       description: "7th character",
       guildId: 1,
       userId: 3,
@@ -127,8 +121,7 @@ const seed = async () => {
       server: "illidan",
       characterClass: "Rogue",
       race: "Human",
-      // level:   test see if its 70 by default
-      contact: "memberfour@gmail.com",
+      contact: "membereight@gmail.com",
       description: "8th character",
       guildId: 1,
       userId: 3,
@@ -139,8 +132,7 @@ const seed = async () => {
       server: "illidan",
       characterClass: "Evoker",
       race: "Dwarf",
-      // level:   test see if its 70 by default
-      contact: "memberfour@gmail.com",
+      contact: "membernine@gmail.com",
       description: "9th character",
       guildId: 1,
       userId: 3,
@@ -151,8 +143,7 @@ const seed = async () => {
       server: "illidan",
       characterClass: "Hunter",
       race: "Dwarf",
-      // level:   test see if its 70 by default
-      contact: "memberfour@gmail.com",
+      contact: "memberten@gmail.com",
       description: "10th character",
       guildId: 1,
       userId: 3,
@@ -163,8 +154,7 @@ const seed = async () => {
       server: "illidan",
       characterClass: "Shaman",
       race: "Dwarf",
-      // level:   test see if its 70 by default
-      contact: "memberfour@gmail.com",
+      contact: "membereleven@gmail.com",
       description: "11th character",
       guildId: 1,
       userId: 3,
@@ -175,8 +165,7 @@ const seed = async () => {
       server: "illidan",
       characterClass: "Death Knight",
       race: "Dwarf",
-      // level:   test see if its 70 by default
-      contact: "memberfour@gmail.com",
+      contact: "membertwelve@gmail.com",
       description: "12th character",
       guildId: 1,
       userId: 3,
@@ -187,8 +176,7 @@ const seed = async () => {
       server: "illidan",
       characterClass: "Warrior",
       race: "Dwarf",
-      // level:   test see if its 70 by default
-      contact: "memberfour@gmail.com",
+      contact: "memberthirteen@gmail.com",
       description: "13th character",
       guildId: 1,
       userId: 3,
@@ -199,8 +187,7 @@ const seed = async () => {
       server: "illidan",
       characterClass: "Warlock",
       race: "Dwarf",
-      // level:   test see if its 70 by default
-      contact: "memberfour@gmail.com",
+      contact: "memberfourteen@gmail.com",
       description: "14th character",
       guildId: 1,
       userId: 3,
@@ -211,8 +198,7 @@ const seed = async () => {
       server: "illidan",
       characterClass: "Druid",
       race: "Dwarf",
-      // level:   test see if its 70 by default
-      contact: "memberfour@gmail.com",
+      contact: "memberfifteen@gmail.com",
       description: "15th character",
       guildId: 1,
       userId: 3,
@@ -223,8 +209,7 @@ const seed = async () => {
       server: "illidan",
       characterClass: "Monk",
       race: "Dwarf",
-      // level:   test see if its 70 by default
-      contact: "memberfour@gmail.com",
+      contact: "membersixteen@gmail.com",
       description: "16th character",
       guildId: 1,
       userId: 3,
@@ -235,8 +220,7 @@ const seed = async () => {
       server: "illidan",
       characterClass: "Mage",
       race: "Dwarf",
-      // level:   test see if its 70 by default
-      contact: "memberfour@gmail.com",
+      contact: "memberseventeen@gmail.com",
       description: "17th character",
       guildId: 1,
       userId: 3,
@@ -247,8 +231,7 @@ const seed = async () => {
       server: "illidan",
       characterClass: "Warrior",
       race: "Dwarf",
-      // level:   test see if its 70 by default
-      contact: "memberfour@gmail.com",
+      contact: "membereighteen@gmail.com",
       description: "18th character",
       guildId: 1,
       userId: 3,
@@ -259,8 +242,8 @@ const seed = async () => {
       server: "illidan",
       characterClass: "Warrior",
       race: "Dwarf",
-      // level:   test see if its 70 by default
-      contact: "memberfour@gmail.com",
+
+      contact: "membernineteen@gmail.com",
       description: "19th character",
       guildId: 1,
       userId: 3,
@@ -271,8 +254,7 @@ const seed = async () => {
       server: "illidan",
       characterClass: "Monk",
       race: "Dwarf",
-      // level:   test see if its 70 by default
-      contact: "memberfour@gmail.com",
+      contact: "membertwenty@gmail.com",
       description: "20th character",
       guildId: 1,
       userId: 3,
@@ -288,7 +270,6 @@ const seed = async () => {
         1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
       ],
       description: "first raid form ever",
-      // guildName: "sampleGuild",
       guildId: 1,
     });
   } catch (err) {
