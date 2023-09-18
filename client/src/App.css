@@ -1,0 +1,9 @@
+.App{
+    font-family: "Mooli";
+    background: linear-gradient(#bf64e6, #ebe76b);
+    margin: 0;
+    width: 100vw;
+    min-height: 100vh;
+    height: 100%;
+    overflow: hidden;
+}

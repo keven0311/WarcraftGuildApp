@@ -33,7 +33,7 @@ function RaidFormView() {
         </span>
       </div>
       <div className="raidforms_container">
-        {guild.raidforms.length > 0 ? (
+        {guild.raidforms && guild.raidforms.length > 0 ? (
           guild.raidforms?.map((raidform) => (
             <div key={raidform.id} className="form_container">
               <div className="w-25">

@@ -34,30 +34,29 @@ function TopNavbar() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mx-5">
-            <NavDropdown title="menu" id="basic-nav-dropdown">
-              {Object.keys(user).length > 0 ? (
+            {Object.keys(user).length > 0 ? (
+              <NavDropdown title="menu" id="basic-nav-dropdown">
                 <NavDropdown.Item
                   href={`/profile/${user.name}`}
                   variant="outline-primary"
                 >
                   Profile
                 </NavDropdown.Item>
-              ) : null}
+                <NavDropdown.Divider />
 
-              <NavDropdown.Divider />
-
-              <NavDropdown.Item>
-                {Object.keys(user).length !== 0 ? (
-                  <Button
-                    id="logOutButton"
-                    variant="light"
-                    onClick={handleLogOut}
-                  >
-                    Log Out
-                  </Button>
-                ) : null}
-              </NavDropdown.Item>
-            </NavDropdown>
+                <NavDropdown.Item>
+                  {Object.keys(user).length !== 0 ? (
+                    <Button
+                      id="logOutButton"
+                      variant="light"
+                      onClick={handleLogOut}
+                    >
+                      Log Out
+                    </Button>
+                  ) : null}
+                </NavDropdown.Item>
+              </NavDropdown>
+            ) : null}
             <div id="logInDiv"></div>
           </Nav>
         </Navbar.Collapse>
