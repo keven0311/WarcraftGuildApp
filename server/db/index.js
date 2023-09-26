@@ -3,6 +3,7 @@ const User = require("./models/User");
 const Guild = require("./models/Guild");
 const Character = require("./models/Character");
 const RaidForm = require("./models/RaidForm");
+const StrategyDoc = require("./models/StrategyDoc");
 
 Guild.hasMany(Character, {
   foreignKey: "guildId",
@@ -19,10 +20,14 @@ Guild.belongsTo(User, {
 Guild.hasMany(RaidForm);
 RaidForm.belongsTo(Guild);
 
+Guild.hasMany(StrategyDoc);
+StrategyDoc.belongsTo(Guild);
+
 module.exports = {
   db,
   User,
   Guild,
   Character,
   RaidForm,
+  StrategyDoc,
 };
