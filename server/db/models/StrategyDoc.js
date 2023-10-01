@@ -10,6 +10,10 @@ const StrategyDoc = db.define("strategyDoc", {
     type: Sequelize.STRING,
     allowNull: true,
   },
+  boss_name: {
+    type: Sequelize.STRING,
+    allowNull: true,
+  },
 });
 
 module.exports = StrategyDoc;
