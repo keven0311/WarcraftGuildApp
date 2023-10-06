@@ -1,4 +1,4 @@
-const { db, User, Guild, Character, RaidForm } = require("./db");
+const { db, User, Guild, Character, RaidForm, StrategyDoc } = require("./db");
 
 const seed = async () => {
   try {
@@ -270,6 +270,27 @@ const seed = async () => {
         1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
       ],
       description: "first raid form ever",
+      guildId: 1,
+    });
+
+    await StrategyDoc.create({
+      url: "https://docs.google.com/document/d/1nfgvzyHlTtDG0uaIMnZhUq2KTNOcWWWhzPrtyCySRLw/edit?usp=sharing",
+      raid: "Aberrus the Shadowed Crucible",
+      boss_name: "Kazzara the Hellforged",
+      guildId: 1,
+    });
+
+    await StrategyDoc.create({
+      url: "https://docs.google.com/document/d/1nfgvzyHlTtDG0uaIMnZhUq2KTNOcWWWhzPrtyCySRLw/edit?usp=sharing",
+      raid: "Aberrus the Shadowed Crucible",
+      boss_name: "The Amalgamation Chamber",
+      guildId: 1,
+    });
+
+    await StrategyDoc.create({
+      url: "https://docs.google.com/document/d/1nfgvzyHlTtDG0uaIMnZhUq2KTNOcWWWhzPrtyCySRLw/edit?usp=sharing",
+      raid: "Aberrus the Shadowed Crucible",
+      boss_name: "The Forgotten Experiments",
       guildId: 1,
     });
   } catch (err) {
